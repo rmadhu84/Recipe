@@ -11,3 +11,4 @@ INSERT INTO UNIT_OF_MEASURE (description) values ('Pinch');
 INSERT INTO UNIT_OF_MEASURE (description) values ('Pound');
 INSERT INTO UNIT_OF_MEASURE (description) values ('Each');
 INSERT INTO UNIT_OF_MEASURE (description) values ('Dash');
+INSERT INTO UNIT_OF_MEASURE (description) values ('Pint');

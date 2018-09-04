@@ -65,6 +65,21 @@ public class RecipeBootStrap implements ApplicationListener<ContextRefreshedEven
 		uom = uomRepo.findByDescription("Tablespoon");
 		UnitOfMeasure tablespoonUom = uom.get();
 
+		uom = uomRepo.findByDescription("Teaspoon");
+		UnitOfMeasure teaspoonUom = uom.get();
+
+		uom = uomRepo.findByDescription("Dash");
+		UnitOfMeasure dashUom = uom.get();
+		
+		uom = uomRepo.findByDescription("Pound");
+		UnitOfMeasure poundUom = uom.get();
+
+		uom = uomRepo.findByDescription("Cup");
+		UnitOfMeasure cupUom = uom.get();
+
+		uom = uomRepo.findByDescription("Pint");
+		UnitOfMeasure pintUom = uom.get();
+
 		// Perfect Guacamole Recipe.
 		Recipe perfectGuacamole = new Recipe();
 		perfectGuacamole.setDescription("Perfect Guacamole");
@@ -121,11 +136,72 @@ public class RecipeBootStrap implements ApplicationListener<ContextRefreshedEven
 		perfectGuacamole.getCategories().add(catRepo.findByCategoryName("American").get());
 		perfectGuacamole.getCategories().add(catRepo.findByCategoryName("Mexican").get());
 
-		// perfectGuacamole.getIngredients().add(new Ingredient("Avacados", new
-		// BigDecimal("2"), eachUom);
-		perfectGuacamole.getIngredients().add(new Ingredient("Fresh Ripe Avacados", new BigDecimal("2"), eachUom));
+		perfectGuacamole.getIngredients()
+				.add(new Ingredient("Fresh Ripe Avacados", new BigDecimal("2"), eachUom, perfectGuacamole));
+		perfectGuacamole.getIngredients()
+				.add(new Ingredient("Kosher Salt", new BigDecimal("0.5"), teaspoonUom, perfectGuacamole));
+		perfectGuacamole.getIngredients()
+				.add(new Ingredient("Fresh Lime\\Lemon juice", new BigDecimal("1"), tablespoonUom, perfectGuacamole));
+		perfectGuacamole.getIngredients().add(new Ingredient("Minced Red Onions or Thinly Sliced Green Onions",
+				new BigDecimal("2"), tablespoonUom, perfectGuacamole));
+		perfectGuacamole.getIngredients()
+				.add(new Ingredient("Serrano Chillies", new BigDecimal("1"), eachUom, perfectGuacamole));
+		perfectGuacamole.getIngredients()
+				.add(new Ingredient("Cilantro", new BigDecimal("2"), tablespoonUom, perfectGuacamole));
+		perfectGuacamole.getIngredients()
+				.add(new Ingredient("Freshly Grated Black Pepper", new BigDecimal("1"), dashUom, perfectGuacamole));
+		perfectGuacamole.getIngredients().add(new Ingredient("Ripe tomato, seeds and pulp removed, chopped",
+				new BigDecimal("1"), eachUom, perfectGuacamole));
 
 		recipes.add(perfectGuacamole);
+
+		// Spicy Chicken Tacos
+		Recipe spicyTacos = new Recipe();
+		spicyTacos.setCookTime(15);
+		spicyTacos.setPrepTime(20);
+		spicyTacos.setServings(4);
+		spicyTacos.setDifficulty(Difficulty.Easy);
+		spicyTacos.setDescription("Spicy Grilled Chicken Tacos");
+
+		directions = new StringBuilder();
+		directions.append("1 Prepare a gas or charcoal grill for medium-high, direct heat.\r\n");
+		directions.append("\r\n");
+		directions.append("2 Make the marinade and coat the chicken: In a large bowl, stir together the chili powder, oregano, cumin, sugar, salt, garlic and orange zest. Stir in the orange juice and olive oil to make a loose paste. Add the chicken to the bowl and toss to coat all over.\r\n");
+		directions.append("\r\n");
+		directions.append("Set aside to marinate while the grill heats and you prepare the rest of the toppings.\r\n");
+		directions.append("\r\n");
+		directions.append("3 Grill the chicken: Grill the chicken for 3 to 4 minutes per side, or until a thermometer inserted into the thickest part of the meat registers 165F. Transfer to a plate and rest for 5 minutes.\r\n");
+		directions.append("\r\n");
+		directions.append("4 Warm the tortillas: Place each tortilla on the grill or on a hot, dry skillet over medium-high heat. As soon as you see pockets of the air start to puff up in the tortilla, turn it with tongs and heat for a few seconds on the other side.\r\n");
+		directions.append("\r\n");
+		directions.append("Wrap warmed tortillas in a tea towel to keep them warm until serving.\r\n");
+		directions.append("\r\n");
+		directions.append("5 Assemble the tacos: Slice the chicken into strips. On each tortilla, place a small handful of arugula. Top with chicken slices, sliced avocado, radishes, tomatoes, and onion slices. Drizzle with the thinned sour cream. Serve with lime wedges.");
+		
+		spicyTacos.setDirections(directions.toString());
+		
+		spicyTacos.getIngredients().add(new Ingredient("Sugar", new BigDecimal("1"), teaspoonUom, spicyTacos));
+		spicyTacos.getIngredients().add(new Ingredient("Salt", new BigDecimal("0.5"), teaspoonUom, spicyTacos));
+		spicyTacos.getIngredients().add(new Ingredient("Garlic, finely chopped", new BigDecimal("1"), eachUom, spicyTacos));
+		spicyTacos.getIngredients().add(new Ingredient("Orange Zest", new BigDecimal("1"), tablespoonUom, spicyTacos));
+		spicyTacos.getIngredients().add(new Ingredient("Fresh Squeezed Orange Juice", new BigDecimal("3"), tablespoonUom, spicyTacos));
+		spicyTacos.getIngredients().add(new Ingredient("Olive Oil", new BigDecimal("1"), teaspoonUom, spicyTacos));
+		spicyTacos.getIngredients().add(new Ingredient("Boneless Skinless Chicken Thighs", new BigDecimal("1.25"), poundUom, spicyTacos));
+		spicyTacos.getIngredients().add(new Ingredient("Corn Tortillas - Small", new BigDecimal("8"), eachUom, spicyTacos));
+		spicyTacos.getIngredients().add(new Ingredient("Packed Baby Arugula", new BigDecimal("3"), cupUom, spicyTacos));
+		spicyTacos.getIngredients().add(new Ingredient("Ripe Avocados - Medium", new BigDecimal("2"), eachUom, spicyTacos));
+		spicyTacos.getIngredients().add(new Ingredient("Radish - Thinely sliced", new BigDecimal("4"), eachUom, spicyTacos));
+		spicyTacos.getIngredients().add(new Ingredient("Cherry Tomatoes - Halved", new BigDecimal("0.5"), pintUom, spicyTacos));
+		spicyTacos.getIngredients().add(new Ingredient("Cilantro - Roughly chopped", new BigDecimal("0.5"), cupUom, spicyTacos));
+		spicyTacos.getIngredients().add(new Ingredient("Sour cream", new BigDecimal("0.5"), cupUom, spicyTacos));
+		spicyTacos.getIngredients().add(new Ingredient("Milk", new BigDecimal("0.25"), cupUom, spicyTacos));
+		spicyTacos.getIngredients().add(new Ingredient("Lime - cut into wedges", new BigDecimal("1"), eachUom, spicyTacos));
+		
+		note = new Note();
+		note.setRecipteNotes("Thin the 0.5 cup sour cream with .25 cup of milk");
+		spicyTacos.setNote(note);
+		recipes.add(spicyTacos);
+		
 		recipeRepo.saveAll(recipes);
 
 	}
