@@ -5,12 +5,14 @@ package com.madhu.recipe.DataLoad;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -36,50 +38,45 @@ public class RecipeBootStrap implements ApplicationListener<ContextRefreshedEven
 	private RecipeRepository recipeRepo;
 	private CategoryRepository catRepo;
 	private UnitOfMeasureRepository uomRepo;
+	
+	private final HashMap<String, UnitOfMeasure> uomMap;
+	private final HashMap<String, Category> CatMap;
+
+	
+	
 
 	/**
 	 * @param recipeRepo
 	 * @param catRepo
 	 * @param uomRepo
+	 * @param uomMap
+	 * @param catMap
 	 */
-	@Autowired
-	public RecipeBootStrap(RecipeRepository recipeRepo, CategoryRepository catRepo, UnitOfMeasureRepository uomRepo) {
-		super();
+	public RecipeBootStrap(RecipeRepository recipeRepo, CategoryRepository catRepo, UnitOfMeasureRepository uomRepo,
+			@Qualifier("getUomMap") HashMap<String, UnitOfMeasure> uomMap, @Qualifier("getCategoryMap") HashMap<String, Category> catMap) {
 		this.recipeRepo = recipeRepo;
 		this.catRepo = catRepo;
 		this.uomRepo = uomRepo;
+		this.uomMap = uomMap;
+		CatMap = catMap;
 	}
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent arg0) {
-		//loadData();
 		recipeRepo.saveAll(loadData());
 	}
 
 	private List<Recipe> loadData() {
 
 		List<Recipe> recipes = new ArrayList<Recipe>(2);
-
-		Optional<UnitOfMeasure> uom = uomRepo.findByDescription("Each");
-		UnitOfMeasure eachUom = uom.get();
-
-		uom = uomRepo.findByDescription("Tablespoon");
-		UnitOfMeasure tablespoonUom = uom.get();
-
-		uom = uomRepo.findByDescription("Teaspoon");
-		UnitOfMeasure teaspoonUom = uom.get();
-
-		uom = uomRepo.findByDescription("Dash");
-		UnitOfMeasure dashUom = uom.get();
 		
-		uom = uomRepo.findByDescription("Pound");
-		UnitOfMeasure poundUom = uom.get();
-
-		uom = uomRepo.findByDescription("Cup");
-		UnitOfMeasure cupUom = uom.get();
-
-		uom = uomRepo.findByDescription("Pint");
-		UnitOfMeasure pintUom = uom.get();
+		UnitOfMeasure eachUom = uomMap.get("Each");
+		UnitOfMeasure tablespoonUom =  uomMap.get("Tablespoon");
+		UnitOfMeasure teaspoonUom =  uomMap.get("Teaspoon");
+		UnitOfMeasure dashUom =  uomMap.get("Dash");
+		UnitOfMeasure poundUom =  uomMap.get("Pound");
+		UnitOfMeasure cupUom =  uomMap.get("Cup");
+		UnitOfMeasure pintUom =  uomMap.get("Pint");
 
 		// Perfect Guacamole Recipe.
 		Recipe perfectGuacamole = new Recipe();
@@ -135,8 +132,9 @@ public class RecipeBootStrap implements ApplicationListener<ContextRefreshedEven
 
 		perfectGuacamole.setNote(note);
 
-		perfectGuacamole.getCategories().add(catRepo.findByCategoryName("American").get());
-		perfectGuacamole.getCategories().add(catRepo.findByCategoryName("Mexican").get());
+		perfectGuacamole.addCategory(CatMap.get("Mexican"));
+		perfectGuacamole.addCategory(CatMap.get("Mexican"));
+		
 
 		perfectGuacamole.addIngredient(new Ingredient("Fresh Ripe Avacados", new BigDecimal("2"), eachUom));
 		perfectGuacamole.addIngredient(new Ingredient("Kosher Salt", new BigDecimal("0.5"), teaspoonUom));
@@ -197,6 +195,9 @@ public class RecipeBootStrap implements ApplicationListener<ContextRefreshedEven
 		note.setRecipteNotes("Thin the 0.5 cup sour cream with .25 cup of milk");
 		note.setRecipe(spicyTacos);
 		spicyTacos.setNote(note);
+		
+		spicyTacos.addCategory(CatMap.get("Mexican"));
+		
 		
 		recipes.add(spicyTacos);
 		

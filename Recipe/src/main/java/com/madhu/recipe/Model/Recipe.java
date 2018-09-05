@@ -83,11 +83,25 @@ public class Recipe {
 	}
 
 
+	/**
+	 * 
+	 * @param Ingredient
+	 * @return Recipe
+	 */
 	public Recipe addIngredient(Ingredient ingredient) {
 		ingredient.setRecipe(this);
 		this.ingredients.add(ingredient);
 		return this;
 	}
 
+	/**
+	 * 
+	 * @param Category
+	 * @return Recipe
+	 */
+	public Recipe addCategory(Category category) {
+		this.categories.add(category);
+		return this;
+	}
 	
 }
