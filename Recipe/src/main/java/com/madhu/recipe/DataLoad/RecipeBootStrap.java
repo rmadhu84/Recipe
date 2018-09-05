@@ -52,10 +52,11 @@ public class RecipeBootStrap implements ApplicationListener<ContextRefreshedEven
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent arg0) {
-		loadData();
+		//loadData();
+		recipeRepo.saveAll(loadData());
 	}
 
-	private void loadData() {
+	private List<Recipe> loadData() {
 
 		List<Recipe> recipes = new ArrayList<Recipe>(2);
 
@@ -137,22 +138,16 @@ public class RecipeBootStrap implements ApplicationListener<ContextRefreshedEven
 		perfectGuacamole.getCategories().add(catRepo.findByCategoryName("American").get());
 		perfectGuacamole.getCategories().add(catRepo.findByCategoryName("Mexican").get());
 
-		perfectGuacamole.getIngredients()
-				.add(new Ingredient("Fresh Ripe Avacados", new BigDecimal("2"), eachUom, perfectGuacamole));
-		perfectGuacamole.getIngredients()
-				.add(new Ingredient("Kosher Salt", new BigDecimal("0.5"), teaspoonUom, perfectGuacamole));
-		perfectGuacamole.getIngredients()
-				.add(new Ingredient("Fresh Lime\\Lemon juice", new BigDecimal("1"), tablespoonUom, perfectGuacamole));
-		perfectGuacamole.getIngredients().add(new Ingredient("Minced Red Onions or Thinly Sliced Green Onions",
-				new BigDecimal("2"), tablespoonUom, perfectGuacamole));
-		perfectGuacamole.getIngredients()
-				.add(new Ingredient("Serrano Chillies", new BigDecimal("1"), eachUom, perfectGuacamole));
-		perfectGuacamole.getIngredients()
-				.add(new Ingredient("Cilantro", new BigDecimal("2"), tablespoonUom, perfectGuacamole));
-		perfectGuacamole.getIngredients()
-				.add(new Ingredient("Freshly Grated Black Pepper", new BigDecimal("1"), dashUom, perfectGuacamole));
-		perfectGuacamole.getIngredients().add(new Ingredient("Ripe tomato, seeds and pulp removed, chopped",
-				new BigDecimal("1"), eachUom, perfectGuacamole));
+		perfectGuacamole.addIngredient(new Ingredient("Fresh Ripe Avacados", new BigDecimal("2"), eachUom));
+		perfectGuacamole.addIngredient(new Ingredient("Kosher Salt", new BigDecimal("0.5"), teaspoonUom));
+		perfectGuacamole.addIngredient(new Ingredient("Fresh Lime\\Lemon juice", new BigDecimal("1"), tablespoonUom));
+		perfectGuacamole.addIngredient(new Ingredient("Minced Red Onions or Thinly Sliced Green Onions",
+				new BigDecimal("2"), tablespoonUom));
+		perfectGuacamole.addIngredient(new Ingredient("Serrano Chillies", new BigDecimal("1"), eachUom));
+		perfectGuacamole.addIngredient(new Ingredient("Cilantro", new BigDecimal("2"), tablespoonUom));
+		perfectGuacamole.addIngredient(new Ingredient("Freshly Grated Black Pepper", new BigDecimal("1"), dashUom));
+		perfectGuacamole.addIngredient(new Ingredient("Ripe tomato, seeds and pulp removed, chopped",
+				new BigDecimal("1"), eachUom));
 
 		recipes.add(perfectGuacamole);
 
@@ -181,22 +176,22 @@ public class RecipeBootStrap implements ApplicationListener<ContextRefreshedEven
 		
 		spicyTacos.setDirections(directions.toString());
 		
-		spicyTacos.getIngredients().add(new Ingredient("Sugar", new BigDecimal("1"), teaspoonUom, spicyTacos));
-		spicyTacos.getIngredients().add(new Ingredient("Salt", new BigDecimal("0.5"), teaspoonUom, spicyTacos));
-		spicyTacos.getIngredients().add(new Ingredient("Garlic, finely chopped", new BigDecimal("1"), eachUom, spicyTacos));
-		spicyTacos.getIngredients().add(new Ingredient("Orange Zest", new BigDecimal("1"), tablespoonUom, spicyTacos));
-		spicyTacos.getIngredients().add(new Ingredient("Fresh Squeezed Orange Juice", new BigDecimal("3"), tablespoonUom, spicyTacos));
-		spicyTacos.getIngredients().add(new Ingredient("Olive Oil", new BigDecimal("1"), teaspoonUom, spicyTacos));
-		spicyTacos.getIngredients().add(new Ingredient("Boneless Skinless Chicken Thighs", new BigDecimal("1.25"), poundUom, spicyTacos));
-		spicyTacos.getIngredients().add(new Ingredient("Corn Tortillas - Small", new BigDecimal("8"), eachUom, spicyTacos));
-		spicyTacos.getIngredients().add(new Ingredient("Packed Baby Arugula", new BigDecimal("3"), cupUom, spicyTacos));
-		spicyTacos.getIngredients().add(new Ingredient("Ripe Avocados - Medium", new BigDecimal("2"), eachUom, spicyTacos));
-		spicyTacos.getIngredients().add(new Ingredient("Radish - Thinely sliced", new BigDecimal("4"), eachUom, spicyTacos));
-		spicyTacos.getIngredients().add(new Ingredient("Cherry Tomatoes - Halved", new BigDecimal("0.5"), pintUom, spicyTacos));
-		spicyTacos.getIngredients().add(new Ingredient("Cilantro - Roughly chopped", new BigDecimal("0.5"), cupUom, spicyTacos));
-		spicyTacos.getIngredients().add(new Ingredient("Sour cream", new BigDecimal("0.5"), cupUom, spicyTacos));
-		spicyTacos.getIngredients().add(new Ingredient("Milk", new BigDecimal("0.25"), cupUom, spicyTacos));
-		spicyTacos.getIngredients().add(new Ingredient("Lime - cut into wedges", new BigDecimal("1"), eachUom, spicyTacos));
+		spicyTacos.addIngredient(new Ingredient("Sugar", new BigDecimal("1"), teaspoonUom));
+		spicyTacos.addIngredient(new Ingredient("Salt", new BigDecimal("0.5"), teaspoonUom));
+		spicyTacos.addIngredient(new Ingredient("Garlic, finely chopped", new BigDecimal("1"), eachUom));
+		spicyTacos.addIngredient(new Ingredient("Orange Zest", new BigDecimal("1"), tablespoonUom));
+		spicyTacos.addIngredient(new Ingredient("Fresh Squeezed Orange Juice", new BigDecimal("3"), tablespoonUom));
+		spicyTacos.addIngredient(new Ingredient("Olive Oil", new BigDecimal("1"), teaspoonUom));
+		spicyTacos.addIngredient(new Ingredient("Boneless Skinless Chicken Thighs", new BigDecimal("1.25"), poundUom));
+		spicyTacos.addIngredient(new Ingredient("Corn Tortillas - Small", new BigDecimal("8"), eachUom));
+		spicyTacos.addIngredient(new Ingredient("Packed Baby Arugula", new BigDecimal("3"), cupUom));
+		spicyTacos.addIngredient(new Ingredient("Ripe Avocados - Medium", new BigDecimal("2"), eachUom));
+		spicyTacos.addIngredient(new Ingredient("Radish - Thinely sliced", new BigDecimal("4"), eachUom));
+		spicyTacos.addIngredient(new Ingredient("Cherry Tomatoes - Halved", new BigDecimal("0.5"), pintUom));
+		spicyTacos.addIngredient(new Ingredient("Cilantro - Roughly chopped", new BigDecimal("0.5"), cupUom));
+		spicyTacos.addIngredient(new Ingredient("Sour cream", new BigDecimal("0.5"), cupUom));
+		spicyTacos.addIngredient(new Ingredient("Milk", new BigDecimal("0.25"), cupUom));
+		spicyTacos.addIngredient(new Ingredient("Lime - cut into wedges", new BigDecimal("1"), eachUom));
 		
 		note = new Note();
 		note.setRecipteNotes("Thin the 0.5 cup sour cream with .25 cup of milk");
@@ -205,7 +200,7 @@ public class RecipeBootStrap implements ApplicationListener<ContextRefreshedEven
 		
 		recipes.add(spicyTacos);
 		
-		recipeRepo.saveAll(recipes);
+		return recipes;
 
 	}
 

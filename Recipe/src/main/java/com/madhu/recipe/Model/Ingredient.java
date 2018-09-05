@@ -58,4 +58,17 @@ public class Ingredient {
 		this.recipe = recipe;
 		this.unitOfMeasure = unitOfMeasure;
 	}
+
+
+	/**
+	 * @param description
+	 * @param amount
+	 * @param unitOfMeasure
+	 */
+	public Ingredient(String description, BigDecimal amount, UnitOfMeasure unitOfMeasure) {
+		super();
+		this.description = description;
+		this.amount = amount;
+		this.unitOfMeasure = unitOfMeasure;
+	}
 }

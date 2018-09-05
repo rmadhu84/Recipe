@@ -23,6 +23,7 @@ import javax.persistence.OneToOne;
 
 import com.madhu.recipe.Enums.Difficulty;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -45,7 +46,7 @@ public class Recipe {
 	private Integer servings;
 	private String source;
 	private String url;
-	
+
 	@Lob
 	private String directions;
 
@@ -59,13 +60,34 @@ public class Recipe {
 	@Enumerated(value = EnumType.STRING)
 	private Difficulty difficulty;
 
+	/*
+	 * Preventing Lombok from creating a Setter for Note property. Created a setter
+	 * manually for Note property
+	 */
 	@OneToOne(cascade = CascadeType.ALL)
 	private Note note;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+	 @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
 	private Set<Ingredient> ingredients = new HashSet<Ingredient>();
 
 	@ManyToMany
 	@JoinTable(name = "recipe_category", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private Set<Category> categories = new HashSet<Category>();
+
+	/**
+	 * @param note the note to set
+	 */
+	public void setNote(Note note) {
+		this.note = note;
+		note.setRecipe(this);
+	}
+
+
+	public Recipe addIngredient(Ingredient ingredient) {
+		ingredient.setRecipe(this);
+		this.ingredients.add(ingredient);
+		return this;
+	}
+
+	
 }
