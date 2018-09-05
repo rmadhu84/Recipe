@@ -129,6 +129,7 @@ public class RecipeBootStrap implements ApplicationListener<ContextRefreshedEven
 		recipteNotes.append("\n");
 		recipteNotes.append("For a deviled egg version with guacamole, try our Guacamole Deviled Eggs!");
 
+		note.setRecipe(perfectGuacamole);
 		note.setRecipteNotes(recipteNotes.toString());
 
 		perfectGuacamole.setNote(note);
@@ -199,7 +200,9 @@ public class RecipeBootStrap implements ApplicationListener<ContextRefreshedEven
 		
 		note = new Note();
 		note.setRecipteNotes("Thin the 0.5 cup sour cream with .25 cup of milk");
+		note.setRecipe(spicyTacos);
 		spicyTacos.setNote(note);
+		
 		recipes.add(spicyTacos);
 		
 		recipeRepo.saveAll(recipes);

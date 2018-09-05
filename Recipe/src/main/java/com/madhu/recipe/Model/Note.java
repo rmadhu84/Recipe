@@ -28,10 +28,10 @@ public class Note {
 	
 	/** 
 	 * Cascade is not used, since we do not need to delete Recipe when a note is deleted.
-	 * Removed Recipe, to maked the relationship one directional
+	 * 
 	 **/
-	//@OneToOne 
-	//private Recipe recipe;
+	@OneToOne 
+	private Recipe recipe;
  
 	@Lob
 	private String recipteNotes;

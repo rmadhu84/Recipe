@@ -17,6 +17,7 @@ import com.madhu.recipe.Model.UnitOfMeasure;
 import com.madhu.recipe.Repositories.CategoryRepository;
 import com.madhu.recipe.Repositories.RecipeRepository;
 import com.madhu.recipe.Repositories.UnitOfMeasureRepository;
+import com.madhu.recipe.Service.RecipeService;
 
 /**
  * @author Madhu
@@ -25,25 +26,21 @@ import com.madhu.recipe.Repositories.UnitOfMeasureRepository;
 @Controller
 public class IndexController {
 
-	public CategoryRepository catRepo;
-	public UnitOfMeasureRepository uomRepo;
-	public RecipeRepository recipeRepo;
+	private final RecipeService recipeService;
+	
+	
 
 	/**
-	 * @param catRepo
-	 * @param uomRepo
-	 * @param recipeRepo
+	 * @param recipeService
 	 */
-	@Autowired
-	public IndexController(CategoryRepository catRepo, UnitOfMeasureRepository uomRepo, RecipeRepository recipeRepo) {
-		this.catRepo = catRepo;
-		this.uomRepo = uomRepo;
-		this.recipeRepo = recipeRepo;
+	public IndexController(RecipeService recipeService) {
+		super();
+		this.recipeService = recipeService;
 	}
 
 	@RequestMapping({"","/","/index", "/index.html"})
 	public String getIndexPage(Model model) {
-		model.addAttribute("recipes", recipeRepo.findAll());
+		model.addAttribute("recipes", recipeService.getRecipes());
 		return "index";
 	}
 	
