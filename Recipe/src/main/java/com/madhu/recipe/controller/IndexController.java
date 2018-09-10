@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.madhu.recipe.Service.RecipeService;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author Madhu
  *
  */
 @Controller
+@Slf4j
 public class IndexController {
 
 	private final RecipeService recipeService;
@@ -33,6 +36,7 @@ public class IndexController {
 	 * @param map2
 	 */
 	public IndexController(RecipeService recipeService, @Qualifier("getTestMap1") HashMap<String, String> map1, @Qualifier("getTestMap2") HashMap<String, String> map2) {
+		log.debug("Insided the Index Controller class ");
 		this.recipeService = recipeService;
 		this.map1 = map1;
 		this.map2 = map2;
