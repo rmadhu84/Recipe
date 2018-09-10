@@ -13,15 +13,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author Madhu
  *
  */
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode(exclude={"recipes"})
 @Entity
 public class Category {
 

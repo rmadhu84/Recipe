@@ -10,7 +10,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,16 +22,13 @@ import javax.persistence.OneToOne;
 
 import com.madhu.recipe.Enums.Difficulty;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 /**
  * @author Madhu
  *
  */
-@Getter
-@Setter
+@Data
 @Entity
 public class Recipe {
 

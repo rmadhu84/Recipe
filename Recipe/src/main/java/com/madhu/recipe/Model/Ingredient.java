@@ -14,17 +14,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import org.hibernate.annotations.ManyToAny;
-
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * @author Madhu
  *
  */
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode(exclude= {"recipe"})
 @Entity
 public class Ingredient {
 	
