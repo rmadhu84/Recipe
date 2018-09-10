@@ -7,11 +7,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -27,12 +25,15 @@ import com.madhu.recipe.Repositories.CategoryRepository;
 import com.madhu.recipe.Repositories.RecipeRepository;
 import com.madhu.recipe.Repositories.UnitOfMeasureRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * @author Madhu
  *
  */
 @Component
 @Transactional
+@Slf4j
 public class RecipeBootStrap implements ApplicationListener<ContextRefreshedEvent> {
 
 	private RecipeRepository recipeRepo;
@@ -63,7 +64,9 @@ public class RecipeBootStrap implements ApplicationListener<ContextRefreshedEven
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent arg0) {
+		log.info(" *** Loading startup data *** ");
 		recipeRepo.saveAll(loadData());
+		log.info("*** Startup data Loaded *** ");
 	}
 
 	private List<Recipe> loadData() {

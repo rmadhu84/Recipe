@@ -10,15 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.madhu.recipe.Model.Recipe;
-import com.madhu.recipe.Repositories.CategoryRepository;
 import com.madhu.recipe.Repositories.RecipeRepository;
-import com.madhu.recipe.Repositories.UnitOfMeasureRepository;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * @author Madhu
  *
  */
 @Service
+@Slf4j
 public class RecipeServiceImpl implements RecipeService {
 
 	public final RecipeRepository recipeRepo;
@@ -29,6 +30,7 @@ public class RecipeServiceImpl implements RecipeService {
 	@Autowired
 	public RecipeServiceImpl(RecipeRepository recipeRepo) {
 		super();
+		log.info("Recipe Service Implementation");
 		this.recipeRepo = recipeRepo;
 	}
 

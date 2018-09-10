@@ -13,7 +13,7 @@ import com.madhu.recipe.Model.Category;
  * @author Madhu
  *
  */
-public interface CategoryRepository extends CrudRepository<Category, Long>{
+public interface CategoryRepository extends CrudRepository<Category, Long> {
 	
 	Optional<Category> findByCategoryName(String categoryName);
 
