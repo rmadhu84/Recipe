@@ -13,4 +13,5 @@ import com.madhu.recipe.Model.Recipe;
  */
 public interface RecipeService {
 	Set<Recipe> getRecipes();
+	Recipe getRecipesById(Long id);
 }

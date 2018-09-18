@@ -1,16 +1,20 @@
 package com.madhu.recipe.Service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.madhu.recipe.Model.Recipe;
@@ -41,5 +45,22 @@ public class RecipeServiceImplTest {
 		assertEquals(recipes.size(), 1);
 		verify(RecipeRepo, times(1)).findAll();
 	}
-
+	
+	@Test
+	public void getRecipeByIdTest() {
+		Recipe recipe = new Recipe();
+		recipe.setId(1L);
+		Optional<Recipe> recipeoptional = Optional.of(recipe);
+		
+		when(RecipeRepo.findById(Mockito.anyLong())).thenReturn(recipeoptional);
+		//when(recipeSerivce.getRecipesById(Mockito.anyLong())).thenReturn(recipeoptional);
+		
+		Recipe recipeOutput = recipeSerivce.getRecipesById(1L);
+		
+		assertNotNull("Null Object Returned", recipeOutput);
+		verify(RecipeRepo, times(1)).findById(1L);
+		verify(RecipeRepo, never()).findAll();
+				
+				
+	}
 }
