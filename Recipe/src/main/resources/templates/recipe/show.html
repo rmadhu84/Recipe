@@ -1,0 +1,91 @@
+<!DOCTYPE html >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="' Recipe - ' + ${recipe.description}"></title>
+
+<!-- css -->
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
+
+<!-- Latest compiled and minified JavaScript -->
+<script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+<script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+
+
+
+</head>
+<body>
+	<div class="container-fluid" style="margin-top: 20px">
+		<div class="page-header col-md-6 col-md-offset-3">
+			<h1 th:text="${recipe.description}">Example Page Header</h1>
+		</div>
+		<div class="col-md-6 col-md-offset-3">
+			<div class="col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h1 class="panel-title">
+							<p th:text="'Preparation Time'">Preparation Time</p>
+						</h1>
+					</div>
+					<div class="table-responsive" th:if="${not #lists.isEmpty(recipe)}">
+						<table class="table table-hover">
+
+							<tr>
+								<td th:text="${recipe.prepTime}">10</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h1 class="panel-title">
+							<p th:text="'Cook Time'">Cook Time</p>
+						</h1>
+					</div>
+					<div class="table-responsive" th:if="${not #lists.isEmpty(recipe)}">
+						<table class="table table-hover">
+
+							<tr>
+								<td th:text="${recipe.cookTime}">15</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="col-md-6 col-md-offset-3">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h1 class="panel-title">
+						<p th:text="${recipe.description} + '  - Ingredients'"></p>
+					</h1>
+				</div>
+				<div class="table-responsive" th:if="${not #lists.isEmpty(recipe)}">
+					<table class="table table-hover">
+						<thead class="thead-inverse">
+							<tr>
+								<th>Description</th>
+								<th>Quantity</th>
+							</tr>
+						</thead>
+						<tr th:each="ingredient:${recipe.ingredients}">
+							<td th:text="${ingredient.description}">Deliciously Healthy</td>
+							<td th:text="${ingredient.amount} +' '+${ingredient.unitOfMeasure.description}"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+
+
+
+	</div>
+</body>
+</html>
