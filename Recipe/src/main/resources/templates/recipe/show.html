@@ -4,13 +4,21 @@
 <meta charset="UTF-8">
 <title th:text="' Recipe - ' + ${recipe.description}"></title>
 
-<!-- css -->
+<!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous"
 	th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}">
 
+<script src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+
 <!-- Latest compiled and minified JavaScript -->
-<script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
-<script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+	integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+	crossorigin="anonymous"
+	th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 
 
 
@@ -20,60 +28,62 @@
 		<div class="page-header col-md-6 col-md-offset-3">
 			<h1 th:text="${recipe.description}">Example Page Header</h1>
 		</div>
+
+		<div class="col-md-6 col-md-offset-3">
+			<div class="panel-primary ">
+				<div class="panel-body">
+					<div class="row">
+						<ul class="list-inline text-justify">
+							<li th:text="'Preparation Time : ' + ${recipe.prepTime}"
+								class="list-inline-item">prep time</li>
+							<li th:text="'Preparation Time : ' + ${recipe.cookTime}"
+								class="list-inline-item">cooking time</li>
+							<li th:text="'Preparation Time : ' + ${recipe.difficulty}"
+								class="list-inline-item">difficulty</li>
+						</ul>
+					</div>
+					<div class="row">
+
+						<ul class="list-inline text-justify">
+							Categories:
+							<li th:remove="all" class="list-inline-item">Cat 1</li>
+							<li th:remove="all" class="list-inline-item">Cat 1</li>
+							<li th:each="category : ${recipe.categories}"
+								th:text="${category.categoryName}" class="list-inline-item">Cat
+								1</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
 		<div class="col-md-6 col-md-offset-3">
 			<div class="row">
-				<div class="col-md-4">
+				<div class="panel panel-group">
+
+					<!-- Igredients Section -->
 					<div class="panel panel-primary">
 						<div class="panel-heading">
 							<h1 class="panel-title">
-								<p th:text="'Preparation Time'">Preparation Time</p>
+								<p th:text="${recipe.description} + '  - Ingredients'"></p>
 							</h1>
 						</div>
 						<div class="table-responsive"
 							th:if="${not #lists.isEmpty(recipe)}">
 							<table class="table table-hover">
-
-								<tr>
-									<td th:text="${recipe.prepTime} + ' Mins'">10</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</div>
-
-
-				<div class="col-md-4">
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<h1 class="panel-title">
-								<p th:text="'Cook Time'">Cook Time</p>
-							</h1>
-						</div>
-						<div class="table-responsive"
-							th:if="${not #lists.isEmpty(recipe)}">
-							<table class="table table-hover">
-
-								<tr>
-									<td th:text="${recipe.cookTime} + ' Mins'">15</td>
-								</tr>
-							</table>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4">
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<h1 class="panel-title">
-								<p th:text="'Difficulty'">Level of Difficulty</p>
-							</h1>
-						</div>
-						<div class="table-responsive"
-							th:if="${not #lists.isEmpty(recipe)}">
-							<table class="table table-hover">
-
-								<tr>
-									<td th:text="${recipe.difficulty}">15</td>
+								<thead class="thead-inverse">
+									<tr>
+										<th>Description</th>
+										<th>Quantity</th>
+									</tr>
+								</thead>
+								<tr th:each="ingredient:${recipe.ingredients}">
+									<td th:text="${ingredient.description}">Deliciously
+										Healthy</td>
+									<td
+										th:text="${ingredient.amount} +' '+${ingredient.unitOfMeasure.description}"></td>
 								</tr>
 							</table>
 						</div>
@@ -81,37 +91,62 @@
 				</div>
 			</div>
 		</div>
-	</div>
 
+		<!-- Directions -->
+		<div class="col-md-6 col-md-offset-3">
+			<div class="row">
+				<div class="panel panel-group">
 
+					<!-- Directions Section -->
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h1 class="panel-title">
+								<p th:text="'Directions'"></p>
+							</h1>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-12">
+									<p th:text="${recipe.directions}">Deliciously Healthy</p>
 
-	<div class="col-md-6 col-md-offset-3">
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-				<h1 class="panel-title">
-					<p th:text="${recipe.description} + '  - Ingredients'"></p>
-				</h1>
-			</div>
-			<div class="table-responsive" th:if="${not #lists.isEmpty(recipe)}">
-				<table class="table table-hover">
-					<thead class="thead-inverse">
-						<tr>
-							<th>Description</th>
-							<th>Quantity</th>
-						</tr>
-					</thead>
-					<tr th:each="ingredient:${recipe.ingredients}">
-						<td th:text="${ingredient.description}">Deliciously Healthy</td>
-						<td
-							th:text="${ingredient.amount} +' '+${ingredient.unitOfMeasure.description}"></td>
-					</tr>
-				</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
+
+		<!-- Notes -->
+		<div class="col-md-6 col-md-offset-3">
+			<div class="row">
+				<div class="panel panel-group">
+
+					<!-- Directions Section -->
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h1 class="panel-title">
+								<p th:text="'Notes'"></p>
+							</h1>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-12">
+									<p th:text="${recipe.note.recipteNotes}">Deliciously Healthy</p>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 
 
 	</div>
+
+
+
 </body>
 </html>
