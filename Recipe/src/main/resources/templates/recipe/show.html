@@ -29,45 +29,37 @@
 			<h1 th:text="${recipe.description}">Example Page Header</h1>
 		</div>
 
-		<div class="col-md-6 col-md-offset-3">
-			<div class="panel-primary ">
-				<div class="panel-body">
-					<div class="row">
-						<ul class="list-inline text-justify">
-							<li th:text="'Preparation Time : ' + ${recipe.prepTime}"
-								class="list-inline-item">prep time</li>
-							<li th:text="'Preparation Time : ' + ${recipe.cookTime}"
-								class="list-inline-item">cooking time</li>
-							<li th:text="'Preparation Time : ' + ${recipe.difficulty}"
-								class="list-inline-item">difficulty</li>
-						</ul>
-					</div>
-					<div class="row">
-
-						<ul class="list-inline text-justify">
-							Categories:
-							<li th:remove="all" class="list-inline-item">Cat 1</li>
-							<li th:remove="all" class="list-inline-item">Cat 1</li>
-							<li th:each="category : ${recipe.categories}"
-								th:text="${category.categoryName}" class="list-inline-item">Cat
-								1</li>
-						</ul>
+		<div class="row">
+		
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel-group">
+					<div class="panel panel-primary">
+						<div class="panel-body">
+							<ul class="list-inline text-justify">
+								<li
+									th:text="'Preparation Time : ' + ${recipe.prepTime} + ' mins'"
+									class="list-inline-item">prep time</li>
+								<li
+									th:text="'Preparation Time : ' + ${recipe.cookTime} + ' mins'"
+									class="list-inline-item">cooking time</li>
+								<li th:text="'Preparation Time : ' + ${recipe.difficulty}"
+									class="list-inline-item">difficulty</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 
+			<div class="col-md-6 col-md-offset-3">
 
-
-		<div class="col-md-6 col-md-offset-3">
-			<div class="row">
 				<div class="panel panel-group">
 
 					<!-- Igredients Section -->
 					<div class="panel panel-primary">
 						<div class="panel-heading">
 							<h1 class="panel-title">
-								<p th:text="${recipe.description} + '  - Ingredients'"></p>
+								<p
+									th:text="${recipe.description} + '  - Ingredients' + '  ( Serves : ' + ${recipe.servings} + ' )'"></p>
 							</h1>
 						</div>
 						<div class="table-responsive"
@@ -90,11 +82,9 @@
 					</div>
 				</div>
 			</div>
-		</div>
 
-		<!-- Directions -->
-		<div class="col-md-6 col-md-offset-3">
-			<div class="row">
+			<!-- Directions -->
+			<div class="col-md-6 col-md-offset-3">
 				<div class="panel panel-group">
 
 					<!-- Directions Section -->
@@ -115,11 +105,9 @@
 					</div>
 				</div>
 			</div>
-		</div>
 
-		<!-- Notes -->
-		<div class="col-md-6 col-md-offset-3">
-			<div class="row">
+			<!-- Notes -->
+			<div class="col-md-6 col-md-offset-3">
 				<div class="panel panel-group">
 
 					<!-- Directions Section -->
@@ -132,7 +120,8 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-md-12">
-									<p th:text="${recipe.note.recipteNotes}">Deliciously Healthy</p>
+									<p th:text="${recipe.note.recipteNotes}">Deliciously
+										Healthy</p>
 
 								</div>
 							</div>
@@ -140,13 +129,12 @@
 					</div>
 				</div>
 			</div>
+
+
+
 		</div>
 
-
-
 	</div>
-
-
 
 </body>
 </html>

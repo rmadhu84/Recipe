@@ -43,6 +43,9 @@ public class Ingredient {
 	@OneToOne(fetch = FetchType.EAGER)
 	private UnitOfMeasure unitOfMeasure;
 
+	public Ingredient() {
+		
+	}
 	
 	/**
 	 * @param description

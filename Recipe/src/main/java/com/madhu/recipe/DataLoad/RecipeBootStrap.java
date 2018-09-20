@@ -156,7 +156,7 @@ public class RecipeBootStrap implements ApplicationListener<ContextRefreshedEven
 		Recipe spicyTacos = new Recipe();
 		spicyTacos.setCookTime(15);
 		spicyTacos.setPrepTime(20);
-		spicyTacos.setServings(4);
+		spicyTacos.setServings(5);
 		spicyTacos.setDifficulty(Difficulty.Easy);
 		spicyTacos.setDescription("Spicy Grilled Chicken Tacos");
 
