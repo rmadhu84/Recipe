@@ -17,16 +17,16 @@ import lombok.Synchronized;
  *
  */
 @Component
-public class NoteCmdToMdlConverter implements Converter<NoteCommand, Note>{
+public class NoteMdlToCmdConverter implements Converter<Note, NoteCommand>{
 
 	@Synchronized
 	@Nullable
 	@Override
-	public Note convert(NoteCommand source) {
+	public NoteCommand convert(Note source) {
 
 		if(source == null)
 			return null;
-		final Note note = new Note();
+		final NoteCommand note = new NoteCommand();
 		note.setId(source.getId());
 		note.setRecipteNotes(source.getRecipteNotes());
 		return note;

@@ -17,21 +17,21 @@ import lombok.Synchronized;
  *
  */
 @Component
-public class RecipeCmdToMdlConverter implements Converter<RecipeCommand, Recipe> {
+public class RecipeMdlToCmdConverter implements Converter<Recipe, RecipeCommand> {
 
-	private final CategoryCmdToMdlConverter categoryConverter;
-	private final NoteCmdToMdlConverter noteConverter;
-	private final IngredientCmdToMdlConverter ingredientConverter;
+	private final CategoryMdlToCmdConverter categoryConverter;
+	private final NoteMdlToCmdConverter noteConverter;
+	private final IngredientMdlToCmdConverter ingredientConverter;
 
 	@Override
 	@Synchronized
 	@Nullable
-	public Recipe convert(RecipeCommand source) {
+	public RecipeCommand convert(Recipe source) {
 		
 		if (source == null)
 			return null;
 
-		final Recipe recipe = new Recipe();
+		final RecipeCommand recipe = new RecipeCommand();
 		recipe.setId(source.getId());
 		recipe.setDescription(source.getDescription());
 		recipe.setCookTime(source.getCookTime());
@@ -58,8 +58,8 @@ public class RecipeCmdToMdlConverter implements Converter<RecipeCommand, Recipe>
 	 * @param noteConverter
 	 * @param ingredientConverter
 	 */
-	public RecipeCmdToMdlConverter(CategoryCmdToMdlConverter categoryConverter, NoteCmdToMdlConverter noteConverter,
-			IngredientCmdToMdlConverter ingredientConverter) {
+	public RecipeMdlToCmdConverter(CategoryMdlToCmdConverter categoryConverter, NoteMdlToCmdConverter noteConverter,
+			IngredientMdlToCmdConverter ingredientConverter) {
 		super();
 		this.categoryConverter = categoryConverter;
 		this.noteConverter = noteConverter;

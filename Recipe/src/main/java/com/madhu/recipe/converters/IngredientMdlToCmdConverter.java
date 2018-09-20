@@ -17,19 +17,19 @@ import lombok.Synchronized;
  *
  */
 @Component
-public class IngredientCmdToMdlConverter implements Converter<IngredientCommand, Ingredient> {
+public class IngredientMdlToCmdConverter implements Converter<Ingredient, IngredientCommand> {
 
-	private final UnitOfMeasureCmdToMdlConverter uomConverter;
+	private final UnitOfMeasureMdlToCmdConverter uomConverter;
 
 	@Synchronized
 	@Nullable
 	@Override
-	public Ingredient convert(IngredientCommand source) {
+	public IngredientCommand convert(Ingredient source) {
 
 		if (source == null)
 			return null;
 
-		final Ingredient ingredient = new Ingredient();
+		final IngredientCommand ingredient = new IngredientCommand();
 		ingredient.setId(source.getId());
 		ingredient.setAmount(source.getAmount());
 		ingredient.setDescription(source.getDescription());
@@ -40,7 +40,7 @@ public class IngredientCmdToMdlConverter implements Converter<IngredientCommand,
 	/**
 	 * @param uomConverter
 	 */
-	public IngredientCmdToMdlConverter(UnitOfMeasureCmdToMdlConverter uomConverter) {
+	public IngredientMdlToCmdConverter(UnitOfMeasureMdlToCmdConverter uomConverter) {
 		super();
 		this.uomConverter = uomConverter;
 	}

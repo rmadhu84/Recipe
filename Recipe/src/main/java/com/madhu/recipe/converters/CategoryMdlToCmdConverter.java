@@ -17,17 +17,17 @@ import lombok.Synchronized;
  *
  */
 @Component
-public class CategoryCmdToMdlConverter implements Converter<CategoryCommand, Category> {
+public class CategoryMdlToCmdConverter implements Converter<Category, CategoryCommand> {
 
 	@Synchronized
 	@Nullable
 	@Override
-	public Category convert(CategoryCommand source) {
+	public CategoryCommand convert(Category source) {
 
 		if(source == null)
 			return null;
 		
-		final Category category = new Category();
+		final CategoryCommand category = new CategoryCommand();
 		category.setId(source.getId());
 		category.setCategoryName(source.getCategoryName());
 		return category;

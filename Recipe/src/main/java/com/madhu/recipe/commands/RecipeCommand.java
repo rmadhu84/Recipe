@@ -34,6 +34,26 @@ public class RecipeCommand {
 	private NoteCommand note;
 	private Set<IngredientCommand> ingredients = new HashSet<IngredientCommand>();
 	private Set<CategoryCommand> categories = new HashSet<CategoryCommand>();
+	
+	/**
+	 * 
+	 * @param ingredient
+	 * @return
+	 */
+	public RecipeCommand addIngredient(IngredientCommand ingredient) {
+		this.ingredients.add(ingredient);
+		return this;
+	}
 
+	/**
+	 * 
+	 * @param category
+	 * @return
+	 */
+	public RecipeCommand addCategory(CategoryCommand category) {
+		// TODO Auto-generated method stub
+		this.categories.add(category);
+		return this;
+	}
 
 }
