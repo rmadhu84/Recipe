@@ -6,7 +6,6 @@ import static org.junit.Assert.assertNull;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 import com.madhu.recipe.Model.Category;
 import com.madhu.recipe.commands.CategoryCommand;
@@ -14,7 +13,7 @@ import com.madhu.recipe.commands.CategoryCommand;
 public class CategoryMdlToCmdToConverterTest {
 
 	private static final Long LONG_VALUE= 1L;
-	private static final String DESCRIPTION = Mockito.anyString();
+	private static final String DESCRIPTION = "Any String";
 	
 	CategoryMdlToCmdConverter converter;  
 	
