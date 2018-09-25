@@ -35,7 +35,7 @@ public class RecipeCmdToMdlConverter implements Converter<RecipeCommand, Recipe>
 		recipe.setId(source.getId());
 		recipe.setDescription(source.getDescription());
 		recipe.setCookTime(source.getCookTime());
-		recipe.setPrepTime(source.getCookTime());
+		recipe.setPrepTime(source.getPrepTime());
 		recipe.setNote(noteConverter.convert(source.getNote()));
 
 		if (source.getCategories() != null && source.getCategories().size() > 0) {
