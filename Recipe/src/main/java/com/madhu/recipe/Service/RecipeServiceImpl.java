@@ -28,9 +28,9 @@ import lombok.extern.slf4j.Slf4j;
 public class RecipeServiceImpl implements RecipeService {
 
 	public final RecipeRepository recipeRepo;
-	
+
 	public final RecipeCmdToMdlConverter toMdlConverter;
-	
+
 	public final RecipeMdlToCmdConverter toCmdConverter;
 
 	/**
@@ -47,7 +47,6 @@ public class RecipeServiceImpl implements RecipeService {
 		this.toCmdConverter = toCmdConverter;
 	}
 
-
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -56,29 +55,35 @@ public class RecipeServiceImpl implements RecipeService {
 	@Override
 	public Set<RecipeCommand> getRecipes() {
 
-		Set<Recipe> recipeSet = new HashSet<Recipe>();
+		// Set<Recipe> recipeSet = new HashSet<Recipe>();
 		Set<RecipeCommand> result = new HashSet<RecipeCommand>();
-		recipeRepo.findAll().iterator().forEachRemaining(recipeSet::add);
-		recipeSet.forEach(recipe ->{
+		/*
+		 * recipeRepo.findAll().iterator().forEachRemaining(recipeSet::add);
+		 * recipeSet.forEach(recipe ->{ result.add(toCmdConverter.convert(recipe)); });
+		 */
+
+		recipeRepo.findAll().iterator().forEachRemaining(recipe -> {
 			result.add(toCmdConverter.convert(recipe));
 		});
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.madhu.recipe.Service.RecipeService#findById(java.lang.Long)
 	 */
 	@Override
 	public RecipeCommand getRecipesById(Long id) {
 		// TODO Auto-generated method stub
 		Optional<Recipe> recipe = recipeRepo.findById(id);
-		if(!recipe.isPresent()) {
+		if (!recipe.isPresent()) {
 			throw new RuntimeException("Could not find recipe.");
 		}
-		
+
 		return toCmdConverter.convert(recipe.get());
 	}
-	
+
 	@Override
 	@Transactional
 	public RecipeCommand saveRecipe(RecipeCommand recipe) {
