@@ -23,6 +23,7 @@ import org.springframework.ui.Model;
 
 import com.madhu.recipe.Model.Recipe;
 import com.madhu.recipe.Service.RecipeService;
+import com.madhu.recipe.commands.RecipeCommand;
 
 public class IndexControllerTest {
 
@@ -51,12 +52,12 @@ public class IndexControllerTest {
 		final String getRecipeOutput = "index";
 
 		// given
-		Set<Recipe> recipes = new HashSet<Recipe>();
-		Recipe recipe1 = new Recipe();
+		Set<RecipeCommand> recipes = new HashSet<RecipeCommand>();
+		RecipeCommand recipe1 = new RecipeCommand();
 		recipe1.setId(1L);
 
 		recipes.add(recipe1);
-		Recipe recipe2 = new Recipe();
+		RecipeCommand recipe2 = new RecipeCommand();
 		recipe2.setId(2L);
 
 		recipes.add(recipe2);

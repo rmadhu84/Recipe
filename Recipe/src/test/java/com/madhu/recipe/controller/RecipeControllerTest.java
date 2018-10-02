@@ -14,8 +14,8 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.madhu.recipe.Model.Recipe;
 import com.madhu.recipe.Service.RecipeService;
+import com.madhu.recipe.commands.RecipeCommand;
 
 public class RecipeControllerTest {
 
@@ -32,7 +32,7 @@ public class RecipeControllerTest {
 
 	@Test
 	public void testGetRecipeById() throws Exception {
-		Recipe recipe = new Recipe();
+		RecipeCommand recipe = new RecipeCommand();
 		recipe.setId(1L);
 
 		MockMvc mvc = MockMvcBuilders.standaloneSetup(rc).build();
