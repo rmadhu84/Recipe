@@ -27,10 +27,10 @@
 	<div class="container-fluid" style="margin-top: 20px">
 		<div class="page-header col-md-6 col-md-offset-3">
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-11">
 					<h1 th:text="${recipe.description}">Example Page Header</h1>
-				</div>
-				<div class="col-md-12">
+			 	</div>
+				<div class="col-md-1"> 
 					<a th:href="@{'/index'}"> <span
 						class="glyphicon glyphicon-home"></span>
 					</a>
@@ -49,9 +49,9 @@
 									th:text="'Preparation Time : ' + ${recipe.prepTime} + ' mins'"
 									class="list-inline-item">prep time</li>
 								<li
-									th:text="'Preparation Time : ' + ${recipe.cookTime} + ' mins'"
+									th:text="'Cook Time : ' + ${recipe.cookTime} + ' mins'"
 									class="list-inline-item">cooking time</li>
-								<li th:text="'Preparation Time : ' + ${recipe.difficulty}"
+								<li th:text="'Difficulty : ' + ${recipe.difficulty}"
 									class="list-inline-item">difficulty</li>
 							</ul>
 						</div>

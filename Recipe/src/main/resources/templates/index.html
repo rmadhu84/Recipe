@@ -52,7 +52,7 @@
 						<tr th:each="recipe:${recipes}">
 							<td th:text="${recipe.id}">789</td>
 							<td th:text="${recipe.description}">Deliciously Healthy</td>
-							<td><a href="#" th:href="@{'/recipe/show/' + ${recipe.id}}">View</a></td>
+							<td><a href="#" th:href="@{'/recipe/show/' + ${recipe.id}}"> <span class="glyphicon glyphicon-eye-open"></a></td>
 						</tr>
 					</table>
 				</div>

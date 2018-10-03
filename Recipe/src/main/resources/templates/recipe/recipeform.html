@@ -29,40 +29,159 @@
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<form th:object="${recipe}" th:action="@{/recipe/}" method="post">
-					
-					<!-- Recipe Name\Desciption  -->
-					<div class="row">
-						<div class="col-md-3 form-group">
-							<label>Recipe Description</label> <input type="text"
-								class="form-control" th:field="*{description}" />
-						</div>
-					</div>
-
-					<!-- Category Check boxes  -->
-					<div class="row">
-						<div class="col-md-3 form-group">
-							<label>Categories:</label>
-						</div>
-						<div class="col-md-9 form-group">
-							<div class="radio">
-								<label> <input type="checkbox" value="" /> Cat 1
-								</label>
+					<div class="pannel-group">
+						<!-- Recipe infomation -->
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<h1 class="panel-title" th:text="'Edit Recipe Information: '">Edit
+									Recipe Information</h1>
 							</div>
-							<div class="radio" th:remove="all">
-								<label> <input type="checkbox" value="" /> Cat 2
-								</label>
+							<div class="panel-body">
+								<!-- Recipe Name\Desciption  -->
+								<div class="row">
+									<div class="col-md-3 form-group">
+										<label>Recipe Description</label> <input type="text"
+											class="form-control" th:field="*{description}" />
+									</div>
+								</div>
+
+								<!-- Category Check boxes  -->
+								<div class="row">
+									<div class="col-md-3 form-group">
+										<label>Categories:</label>
+									</div>
+									<div class="col-md-9 form-group">
+										<div class="radio">
+											<label> <input type="checkbox" value="" /> Cat 1
+											</label>
+										</div>
+										<div class="radio" th:remove="all">
+											<label> <input type="checkbox" value="" /> Cat 2
+											</label>
+										</div>
+									</div>
+								</div>
+
+
+								<div class="row">
+
+									<!-- Preparation Time -->
+									<div class="col-md-3 form-group">
+										<label th:text="'Prep Time: '">Preparation Time</label> <input
+											type="text" class="form-control" th:field="*{prepTime}" />
+									</div>
+
+									<!-- Cook Time -->
+									<div class="col-md-3 form-group">
+										<label th:text="'Cook Time: '">Cook Time</label> <input
+											type="text" class="form-control" th:field="*{cookTime}" />
+									</div>
+
+									<!-- Difficulty -->
+									<div class="col-md-3 form-group">
+										<label th:text="'Difficulty: '">Difficulty</label> <select
+											class="form-control" th:field="*{difficulty}">
+											<option
+												th:each="level : ${T(com.madhu.recipe.Enums.Difficulty).values()}"
+												th:value="${level}" th:text="${level}">Easy</option>
+											<option value="Moderate" th:remove="all">Moderate</option>
+											<option value="Hard" th:remove="all">Hard</option>
+										</select>
+
+									</div>
+
+								</div>
+
+								<div class="row">
+									<!-- Serving size -->
+									<div class="col-md-3 form-group">
+										<label th:text="'Servings: '">Servings: </label> <input
+											type="text" class="form-control" th:field="*{servings}" />
+									</div>
+
+									<!-- Source  -->
+									<div class="col-md-3 form-group">
+										<label th:text="'Source: '">Servings: </label> <input
+											type="text" class="form-control" th:field="*{source}" />
+									</div>
+
+									<!-- URL  -->
+									<div class="col-md-3 form-group">
+										<label th:text="'URL: '">Servings: </label> <input type="text"
+											class="form-control" th:field="*{url}" />
+									</div>
+
+								</div>
 							</div>
 						</div>
+
+						<!-- Ingredients -->
+
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<div class="row">
+									<div class="col-md-11 form-group">
+										<h1 class="panel-title" th:text="'Ingredients: '">Ingredients:
+										</h1>
+									</div>
+									<div class="col-md-1 form-group">
+										<a class="btn btn-default" href="#" role="button">Edit</a>
+									</div>
+								</div>
+							</div>
+
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-12 form-group">
+										<ul>
+											<li th:remove="all">1 Cup of milk</li>
+											<li th:remove="all">1 Teaspoon of chocolate</li>
+											<li th:each="ingredient : ${recipe.ingredients}"
+												th:text="${(ingredient.getAmount() +
+                                        ' ' + ingredient.uom.getDescription() +
+                                        ' - ' + ingredient.getDescription())}">1
+												Teaspoon of Sugar</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<h1 class="panel-title">Directions</h1>
+							</div>
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-12 form-group">
+										<textarea class="form-control" rows="3"
+											th:field="*{directions}"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<h1 class="panel-title" th:text="'Notes: '">Notes:</h1>
+							</div>
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-12 form-group">
+										<textarea class="form-control" rows="3" th:field="*{note.recipteNotes}"></textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<button type="submit" class="btn btn-primary">Submit</button>
+						<a th:href="@{'/index'}" id="cancel" name="cancel"
+							class="btn btn-default">Cancel</a>
 					</div>
-					
-					<!-- Preparation Time -->
-					
-
-					<button type="submit" class="btn btn-primary">Submit</button>
-					<a th:href="@{'/index'}" id="cancel" name="cancel"
-						class="btn btn-default">Cancel</a>
-
-					<!--  -->
+					<!-- Hidden fields -->
+					<input type="hidden" th:field="*{id}"/>
 				</form>
 
 			</div>

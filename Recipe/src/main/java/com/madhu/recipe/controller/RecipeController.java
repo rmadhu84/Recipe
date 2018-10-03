@@ -44,14 +44,18 @@ public class RecipeController {
 	@RequestMapping("/new")
 	public String createOrEditRecipe(Model model) {
 		System.out.println("Action call works.. YAY !!!");
-		model.addAttribute("recipe", new RecipeCommand());
+		log.info("Create new Recipe ...");
+		RecipeCommand command = new RecipeCommand();
+		//command.setCookTime(10);
+		model.addAttribute("recipe", command);
+		
 		return "recipe/recipeform";
 	}
 	
 	@PostMapping("/")
 	public String saveOrUpdate(@ModelAttribute RecipeCommand command) {
-		System.out.println("Redirecting to Index Page.. YAY !!!" + command.getDescription());
-		
-		return "redirect:/recipe/show/" + 1;
+		System.out.println("Redirecting to Index Page.. YAY !!!" + command.getDifficulty());
+		command = recipeService.saveRecipe(command);
+		return "redirect:/recipe/show/" + command.getId();
 	}
 }
