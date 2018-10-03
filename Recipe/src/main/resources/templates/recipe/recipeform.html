@@ -24,17 +24,44 @@
 
 </head>
 <body>
+
 	<div class="container-fluid" style="margin-top: 20px">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<form th:object="${recipe}" th:action="@{/recipe/}" method="post">
+					
+					<!-- Recipe Name\Desciption  -->
 					<div class="row">
 						<div class="col-md-3 form-group">
 							<label>Recipe Description</label> <input type="text"
 								class="form-control" th:field="*{description}" />
 						</div>
 					</div>
+
+					<!-- Category Check boxes  -->
+					<div class="row">
+						<div class="col-md-3 form-group">
+							<label>Categories:</label>
+						</div>
+						<div class="col-md-9 form-group">
+							<div class="radio">
+								<label> <input type="checkbox" value="" /> Cat 1
+								</label>
+							</div>
+							<div class="radio" th:remove="all">
+								<label> <input type="checkbox" value="" /> Cat 2
+								</label>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Preparation Time -->
+					
+
 					<button type="submit" class="btn btn-primary">Submit</button>
+					<a th:href="@{'/index'}" id="cancel" name="cancel"
+						class="btn btn-default">Cancel</a>
+
 				</form>
 
 			</div>
