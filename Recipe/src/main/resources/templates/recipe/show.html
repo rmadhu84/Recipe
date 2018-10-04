@@ -29,8 +29,8 @@
 			<div class="row">
 				<div class="col-md-11">
 					<h1 th:text="${recipe.description}">Example Page Header</h1>
-			 	</div>
-				<div class="col-md-1"> 
+				</div>
+				<div class="col-md-1">
 					<a th:href="@{'/index'}"> <span
 						class="glyphicon glyphicon-home"></span>
 					</a>
@@ -48,8 +48,7 @@
 								<li
 									th:text="'Preparation Time : ' + ${recipe.prepTime} + ' mins'"
 									class="list-inline-item">prep time</li>
-								<li
-									th:text="'Cook Time : ' + ${recipe.cookTime} + ' mins'"
+								<li th:text="'Cook Time : ' + ${recipe.cookTime} + ' mins'"
 									class="list-inline-item">cooking time</li>
 								<li th:text="'Difficulty : ' + ${recipe.difficulty}"
 									class="list-inline-item">difficulty</li>
@@ -66,9 +65,8 @@
 					<!-- Igredients Section -->
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<h1 class="panel-title">
-								<p
-									th:text="${recipe.description} + '  - Ingredients' + '  ( Serves : ' + ${recipe.servings} + ' )'"></p>
+							<h1 class="panel-title"
+								th:text="${recipe.description} + '  - Ingredients' + '  ( Serves : ' + ${recipe.servings} + ' )'">
 							</h1>
 						</div>
 						<div class="table-responsive"
@@ -99,8 +97,7 @@
 					<!-- Directions Section -->
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<h1 class="panel-title">
-								<p th:text="'Directions'"></p>
+							<h1 class="panel-title" th:text="'Directions'">
 							</h1>
 						</div>
 						<div class="panel-body">
@@ -122,8 +119,7 @@
 					<!-- Directions Section -->
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<h1 class="panel-title">
-								<p th:text="'Notes'"></p>
+							<h1 class="panel-title" th:text="'Notes'">
 							</h1>
 						</div>
 						<div class="panel-body">

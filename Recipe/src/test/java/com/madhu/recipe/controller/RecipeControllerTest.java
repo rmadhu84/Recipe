@@ -14,6 +14,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import com.madhu.recipe.Service.CategoryService;
 import com.madhu.recipe.Service.RecipeService;
 import com.madhu.recipe.commands.RecipeCommand;
 
@@ -23,11 +24,14 @@ public class RecipeControllerTest {
 
 	@Mock
 	RecipeService recipeService;
+	
+	@Mock
+	CategoryService categoryService;
 
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		rc = new RecipeController(recipeService);
+		rc = new RecipeController(recipeService, categoryService);
 	}
 
 	@Test

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.madhu.recipe.Service.CategoryService;
 import com.madhu.recipe.Service.RecipeService;
 import com.madhu.recipe.commands.RecipeCommand;
 
@@ -25,13 +26,17 @@ import lombok.extern.slf4j.Slf4j;
 public class RecipeController {
 
 	private RecipeService recipeService;
+	
+	private CategoryService categoryService;
 
 	/**
 	 * @param recipeService
+	 * @param catergoryService
 	 */
-	public RecipeController(RecipeService recipeService) {
+	public RecipeController(RecipeService recipeService, CategoryService categoryService) {
 		super();
 		this.recipeService = recipeService;
+		this.categoryService = categoryService;
 	}
 	 
 	@RequestMapping("/show/{id}")
@@ -46,7 +51,11 @@ public class RecipeController {
 		System.out.println("Action call works.. YAY !!!");
 		log.info("Create new Recipe ...");
 		RecipeCommand command = new RecipeCommand();
-		//command.setCookTime(10);
+		
+		categoryService.getAllCategories().forEach(category ->{
+			command.addCategory(category);
+		});
+		
 		model.addAttribute("recipe", command);
 		
 		return "recipe/recipeform";
