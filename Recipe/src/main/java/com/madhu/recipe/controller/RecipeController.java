@@ -64,6 +64,12 @@ public class RecipeController {
 	@PostMapping("/")
 	public String saveOrUpdate(@ModelAttribute RecipeCommand command) {
 		System.out.println("Redirecting to Index Page.. YAY !!!" + command.getDifficulty());
+		
+		command.getSelectedCategories().forEach(category ->{
+			System.out.println(category.toString());
+			System.out.println(categoryService.getCategoryByName(category));
+		});
+		
 		command = recipeService.saveRecipe(command);
 		return "redirect:/recipe/show/" + command.getId();
 	}

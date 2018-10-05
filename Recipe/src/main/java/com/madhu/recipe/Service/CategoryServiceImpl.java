@@ -43,8 +43,8 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public CategoryCommand getCategoryByName(String categoryName) {
 		log.info("Fetching: " + categoryName);
-		
-		return null;
+		Set<CategoryCommand> categories = new HashSet<CategoryCommand>();
+		return converter.convert(catRepo.findByCategoryName(categoryName).orElse(null));
 	}
 
 }

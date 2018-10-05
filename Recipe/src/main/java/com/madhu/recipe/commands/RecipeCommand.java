@@ -3,7 +3,9 @@
  */
 package com.madhu.recipe.commands;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import com.madhu.recipe.Enums.Difficulty;
@@ -34,6 +36,7 @@ public class RecipeCommand {
 	private NoteCommand note;
 	private Set<IngredientCommand> ingredients = new HashSet<IngredientCommand>();
 	private Set<CategoryCommand> categories = new HashSet<CategoryCommand>();
+	private List<String> selectedCategories = new ArrayList<String>();
 	
 	/**
 	 * 
