@@ -5,7 +5,9 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.Before;
@@ -30,11 +32,16 @@ public class CategoryServiceImplTest {
 	private static final Long LONG_VALUE = 1L;
 	private static final String CATEGORY_NAME = "Category1";
 	
+	private static final List<String> CATEGORY_NAMES_LIST = new ArrayList<String>();
+	
+	
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
 		converter = new CategoryMdlToCmdConverter();
 		categoryService = new CategoryServiceImpl(catRepo, converter);
+		
+	
 	}
 
 	@Test
@@ -53,7 +60,7 @@ public class CategoryServiceImplTest {
 		//then
 		assertEquals(commandData.size(), 1);
 		
-		verify(catRepo, times(1));
+		verify(catRepo, times(1)).findAll();
 	}
 
 	@Test

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.validateMockitoUsage;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -11,6 +12,7 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -90,7 +92,12 @@ public class RecipeServiceImplTest {
 
 		assertNotNull("Null Object Returned", recipeOutput);
 		verify(RecipeRepo, times(1)).findById(1L);
-		verify(RecipeRepo, never()).findAll();
+    	verify(RecipeRepo, never()).findAll();
 
+	}
+	
+	@After
+	public void validate() {
+	    validateMockitoUsage();
 	}
 }

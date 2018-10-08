@@ -93,4 +93,12 @@ public class RecipeServiceImpl implements RecipeService {
 		return savedRecipe;
 	}
 
+	@Override
+	public boolean deleteRecipeById(Long id) {
+		log.info("Deleting Recipe");
+		recipeRepo.deleteById(id);
+		log.info("Recipe deleted !!!");
+		return true;
+	}
+
 }

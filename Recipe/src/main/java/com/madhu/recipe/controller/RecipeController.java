@@ -47,7 +47,7 @@ public class RecipeController {
 	}
 	
 	@RequestMapping("/new")
-	public String createOrEditRecipe(Model model) {
+	public String createRecipe(Model model) {
 		System.out.println("Action call works.. YAY !!!");
 		log.info("Create new Recipe ...");
 		RecipeCommand command = new RecipeCommand();
@@ -61,6 +61,14 @@ public class RecipeController {
 		return "recipe/recipeform";
 	}
 	
+	@RequestMapping("/{id}/edit/")
+	public String editRecipe(@PathVariable String id, Model model) {
+		log.info("Edit Recipe ...");
+		RecipeCommand command = recipeService.getRecipesById(new Long(id));
+		model.addAttribute("recipe", command);
+		return "recipe/recipeform";
+	}
+	
 	@PostMapping("/")
 	public String saveOrUpdate(@ModelAttribute RecipeCommand command) {
 		log.info("*** Saving recipe *** " + command.getId());
@@ -70,5 +78,12 @@ public class RecipeController {
 		command = recipeService.saveRecipe(command);
 		log.info("*** Redirecting to Home Page *** ");
 		return "redirect:/recipe/" + command.getId() + "/show/";
+	}
+	
+	@RequestMapping("/{id}/delete/")
+	public String deleteRecipe(@PathVariable String id) {
+		log.info("*** Deleting Recipe *** "+ id);
+		recipeService.deleteRecipeById(new Long(id));
+		return "redirect:/index";
 	}
 }

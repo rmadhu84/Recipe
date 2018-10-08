@@ -15,4 +15,5 @@ public interface RecipeService {
 	Set<RecipeCommand> getRecipes();
 	RecipeCommand getRecipesById(Long id);
 	RecipeCommand saveRecipe(RecipeCommand recipe);
+	boolean deleteRecipeById(Long id);
 }
