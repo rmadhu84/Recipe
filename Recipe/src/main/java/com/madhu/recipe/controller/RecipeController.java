@@ -39,7 +39,7 @@ public class RecipeController {
 		this.categoryService = categoryService;
 	}
 	 
-	@RequestMapping("/show/{id}")
+	@RequestMapping("/{id}/show/")
 	public String getRecipeById(@PathVariable String id, Model model) {
 		
 		model.addAttribute("recipe",recipeService.getRecipesById(new Long(id)));
@@ -63,14 +63,12 @@ public class RecipeController {
 	
 	@PostMapping("/")
 	public String saveOrUpdate(@ModelAttribute RecipeCommand command) {
-		System.out.println("Redirecting to Index Page.. YAY !!!" + command.getDifficulty());
+		log.info("*** Saving recipe *** " + command.getId());
 		
-		command.getSelectedCategories().forEach(category ->{
-			System.out.println(category.toString());
-			System.out.println(categoryService.getCategoryByName(category));
-		});
+		command.getCategories().addAll(categoryService.getCategoriesByNames(command.getSelectedCategories()));
 		
 		command = recipeService.saveRecipe(command);
-		return "redirect:/recipe/show/" + command.getId();
+		log.info("*** Redirecting to Home Page *** ");
+		return "redirect:/recipe/" + command.getId() + "/show/";
 	}
 }

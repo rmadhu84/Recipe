@@ -54,6 +54,13 @@
 									class="list-inline-item">difficulty</li>
 							</ul>
 						</div>
+						<div class="panel-body">
+							<ul class="list-inline text-justify">
+							<li th:text="'Category: '">Category</li>
+								<li th:each="category : ${recipe.categories}"
+									th:text="${category.categoryName}" />
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -97,8 +104,7 @@
 					<!-- Directions Section -->
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<h1 class="panel-title" th:text="'Directions'">
-							</h1>
+							<h1 class="panel-title" th:text="'Directions'"></h1>
 						</div>
 						<div class="panel-body">
 							<div class="row">
@@ -119,8 +125,7 @@
 					<!-- Directions Section -->
 					<div class="panel panel-primary">
 						<div class="panel-heading">
-							<h1 class="panel-title" th:text="'Notes'">
-							</h1>
+							<h1 class="panel-title" th:text="'Notes'"></h1>
 						</div>
 						<div class="panel-body">
 							<div class="row">

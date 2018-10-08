@@ -1,6 +1,7 @@
 package com.madhu.recipe.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +44,20 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public CategoryCommand getCategoryByName(String categoryName) {
 		log.info("Fetching: " + categoryName);
-		Set<CategoryCommand> categories = new HashSet<CategoryCommand>();
+		
 		return converter.convert(catRepo.findByCategoryName(categoryName).orElse(null));
 	}
+
+	@Override
+	public Set<CategoryCommand> getCategoriesByNames(List<String> categoryNames) {
+		log.info("Fetching list of categories by names");
+		Set<CategoryCommand> categories = new HashSet<CategoryCommand>();
+		catRepo.findByCategoryNameIn(categoryNames).forEach(category ->{
+			categories.add(converter.convert(category));
+		});
+		return categories;
+	}
+	
+
 
 }

@@ -51,7 +51,7 @@
 										<label>Categories:</label>
 									</div>
 									<div class="col-md-9 form-group">
-										<div class="radio">
+										<div class="radio" th:remove="all">
 											<label> <input type="checkbox" value="" /> Cat 1
 											</label>
 										</div>
@@ -59,13 +59,16 @@
 											<label> <input type="checkbox" value="" /> Cat 2
 											</label>
 										</div>
-										
+
 										<ul class="list-inline text-justify">
-										<li th:each="category : ${recipe.categories}" >
-										<input type="checkbox" th:value="${category.categoryName}" th:field="*{selectedCategories}" />	
-										<label th:text="${category.categoryName}"></label>				
-										</li>
-										
+											<li th:each="category : ${recipe.categories}"><input
+												type="checkbox" th:value="${category.categoryName}"
+												th:field="*{selectedCategories}" />
+												
+												 <label th:for="${#ids.prev('selectedCategories')}"   
+												        th:text="${category.categoryName}"></label>
+											</li>
+
 										</ul>
 									</div>
 								</div>
@@ -177,7 +180,8 @@
 							<div class="panel-body">
 								<div class="row">
 									<div class="col-md-12 form-group">
-										<textarea class="form-control" rows="3" th:field="*{note.recipteNotes}"></textarea>
+										<textarea class="form-control" rows="3"
+											th:field="*{note.recipteNotes}"></textarea>
 									</div>
 								</div>
 							</div>
@@ -189,7 +193,7 @@
 							class="btn btn-default">Cancel</a>
 					</div>
 					<!-- Hidden fields -->
-					<input type="hidden" th:field="*{id}"/>
+					<input type="hidden" th:field="*{id}" />
 				</form>
 
 			</div>

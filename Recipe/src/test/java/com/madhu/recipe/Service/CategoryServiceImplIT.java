@@ -3,8 +3,11 @@
  */
 package com.madhu.recipe.Service;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.Before;
@@ -26,7 +29,15 @@ public class CategoryServiceImplIT {
 
 	@Autowired
 	private CategoryService service;
+	
+	
+	private static final String AMERICAN = "American";
+	private static final String ITALIAN = "Italian";
 
+	private static final List<String> LIST_OF_NAMES = new ArrayList<String>() {{
+	add(AMERICAN);
+	add(ITALIAN);
+	}};
 	
 	@Before
 	public void setUp() throws Exception {
@@ -42,6 +53,14 @@ public class CategoryServiceImplIT {
 	@Test
 	public void testGetCategoryByName() {
 		//fail("Not yet implemented");
+		CategoryCommand command = service.getCategoryByName(AMERICAN);
+		assertEquals(AMERICAN, command.getCategoryName());
+	}
+	
+	@Test
+	public void tesGetListOfCategoriesByNames() {
+		Set<CategoryCommand> commandSet = service.getCategoriesByNames(LIST_OF_NAMES);
+		assertEquals(2, commandSet.size());
 	}
 
 }
