@@ -14,6 +14,7 @@ import com.madhu.recipe.commands.RecipeCommand;
 public interface RecipeService {
 	Set<RecipeCommand> getRecipes();
 	RecipeCommand getRecipesById(Long id);
+	RecipeCommand getRecipesByIdForEdit(Long id);
 	RecipeCommand saveRecipe(RecipeCommand recipe);
 	boolean deleteRecipeById(Long id);
 }

@@ -27,11 +27,15 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RecipeServiceImpl implements RecipeService {
 
-	public final RecipeRepository recipeRepo;
+	private final RecipeRepository recipeRepo;
 
-	public final RecipeCmdToMdlConverter toMdlConverter;
+	private final RecipeCmdToMdlConverter toMdlConverter;
 
-	public final RecipeMdlToCmdConverter toCmdConverter;
+	private final RecipeMdlToCmdConverter toCmdConverter;
+	
+	private final CategoryService categoryService;
+	
+	
 
 	/**
 	 * @param recipeRepo
@@ -39,12 +43,13 @@ public class RecipeServiceImpl implements RecipeService {
 	 * @param toCmdConverter
 	 */
 	public RecipeServiceImpl(RecipeRepository recipeRepo, RecipeCmdToMdlConverter toMdlConverter,
-			RecipeMdlToCmdConverter toCmdConverter) {
+			RecipeMdlToCmdConverter toCmdConverter, CategoryService categoryService) {
 		super();
 		log.info("Recipe Service Implementation");
 		this.recipeRepo = recipeRepo;
 		this.toMdlConverter = toMdlConverter;
 		this.toCmdConverter = toCmdConverter;
+		this.categoryService = categoryService;
 	}
 
 	/*
@@ -83,11 +88,30 @@ public class RecipeServiceImpl implements RecipeService {
 
 		return toCmdConverter.convert(recipe.get());
 	}
+	
+	@Override
+	public RecipeCommand getRecipesByIdForEdit(Long id) {
+
+		RecipeCommand command = getRecipesById(id);
+		
+		command.getCategories().forEach(category ->{
+			command.getSelectedCategories().add(category.getCategoryName());
+			
+		});
+		
+		command.getCategories().clear();
+		categoryService.getAllCategories().forEach(category ->{
+			command.addCategory(category);
+		});
+
+		return command;
+	}
 
 	@Override
 	@Transactional
 	public RecipeCommand saveRecipe(RecipeCommand recipe) {
 		log.debug("Recipe saved");
+		recipe.getCategories().addAll(categoryService.getCategoriesByNames(recipe.getSelectedCategories()));
 		Recipe unSavedRecipe = toMdlConverter.convert(recipe);
 		RecipeCommand savedRecipe = toCmdConverter.convert(recipeRepo.save(unSavedRecipe));
 		return savedRecipe;

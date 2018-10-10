@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
 import com.madhu.recipe.Model.Recipe;
+import com.madhu.recipe.Service.CategoryService;
 import com.madhu.recipe.Service.RecipeService;
 import com.madhu.recipe.commands.RecipeCommand;
 
@@ -35,10 +36,13 @@ public class IndexControllerTest {
 	@Mock
 	RecipeService recipeService;
 
+	@Mock
+	CategoryService categoryService;
+	
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		ic = new IndexController(recipeService);
+		ic = new IndexController(recipeService, categoryService);
 	}
 
 	@Test

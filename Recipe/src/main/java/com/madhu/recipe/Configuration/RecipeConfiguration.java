@@ -3,16 +3,16 @@
  */
 package com.madhu.recipe.Configuration;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.madhu.recipe.Model.Category;
 import com.madhu.recipe.Model.UnitOfMeasure;
 import com.madhu.recipe.Repositories.CategoryRepository;
-import com.madhu.recipe.Repositories.UnitOfMeasureRepository;
-
-import java.util.HashMap;
-import java.util.Map;;
+import com.madhu.recipe.Repositories.UnitOfMeasureRepository;;
 
 /**
  * @author ramachandranm1
@@ -57,6 +57,7 @@ public class RecipeConfiguration {
 	}
 	
 	@Bean
+	
 	public HashMap<String, Category> getCategoryMap(){
 		HashMap<String, Category> map = new HashMap<String, Category>();
 		

@@ -21,6 +21,7 @@ import org.mockito.MockitoAnnotations;
 
 import com.madhu.recipe.Model.Note;
 import com.madhu.recipe.Model.Recipe;
+import com.madhu.recipe.Repositories.CategoryRepository;
 import com.madhu.recipe.Repositories.RecipeRepository;
 import com.madhu.recipe.commands.RecipeCommand;
 import com.madhu.recipe.converters.CategoryCmdToMdlConverter;
@@ -41,9 +42,16 @@ public class RecipeServiceImplTest {
 	RecipeCmdToMdlConverter toMdlConverter;
 
 	RecipeMdlToCmdConverter toCmdConverter;
+	
+	CategoryMdlToCmdConverter catMdlToCmdconverter;
+	
+	CategoryServiceImpl categoryService;
 
 	@Mock
 	RecipeRepository RecipeRepo;
+	
+	@Mock
+	CategoryRepository catRepo;
 
 	@Before
 	public void setUp() throws Exception {
@@ -54,8 +62,12 @@ public class RecipeServiceImplTest {
 
 		toCmdConverter = new RecipeMdlToCmdConverter(new CategoryMdlToCmdConverter(), new NoteMdlToCmdConverter(),
 				new IngredientMdlToCmdConverter(new UnitOfMeasureMdlToCmdConverter()));
+		
+		catMdlToCmdconverter = new CategoryMdlToCmdConverter();
+		
+		categoryService = new CategoryServiceImpl(catRepo, catMdlToCmdconverter);
 
-		recipeSerivce = new RecipeServiceImpl(RecipeRepo, toMdlConverter, toCmdConverter);
+		recipeSerivce = new RecipeServiceImpl(RecipeRepo, toMdlConverter, toCmdConverter, categoryService);
 	}
 
 	@Test

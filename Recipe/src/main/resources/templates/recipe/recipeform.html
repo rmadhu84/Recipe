@@ -33,9 +33,19 @@
 						<!-- Recipe infomation -->
 						<div class="panel panel-primary">
 							<div class="panel-heading">
-								<h1 class="panel-title" th:text="'Edit Recipe Information: '">Edit
-									Recipe Information</h1>
+								<div class="row">
+									<div class="col-md-11 form-group">
+										<h1 class="panel-title" th:text="'Edit Recipe Information: '">Edit
+											Recipe Information</h1>
+									</div>
+									<div class="col-md-1 form-group">
+										<a th:href="@{'/index'}" class="hover"> <span
+											class="glyphicon glyphicon-home hover" style="color: white"></span>
+										</a>
+									</div>
+								</div>
 							</div>
+
 							<div class="panel-body">
 								<!-- Recipe Name\Desciption  -->
 								<div class="row">
@@ -61,14 +71,10 @@
 										</div>
 
 										<ul class="list-inline text-justify">
-											<li th:each="category : ${recipe.categories}"><input
-												type="checkbox" th:value="${category.categoryName}"
-												th:field="*{selectedCategories}" />
-												
-												 <label th:for="${#ids.prev('selectedCategories')}"   
-												        th:text="${category.categoryName}"></label>
+											<li th:each="category : ${recipe.categories}">
+												<input type="checkbox" th:value="${category.categoryName}" th:field="*{selectedCategories}" th:checked="true" /> 
+												<label th:for="${#ids.prev('selectedCategories')}" th:text="${category.categoryName}"></label>
 											</li>
-
 										</ul>
 									</div>
 								</div>
@@ -147,11 +153,11 @@
 										<ul>
 											<li th:remove="all">1 Cup of milk</li>
 											<li th:remove="all">1 Teaspoon of chocolate</li>
-											<li th:each="ingredient : ${recipe.ingredients}"
-												th:text="${(ingredient.getAmount() +
-                                        ' ' + ingredient.uom.getDescription() +
-                                        ' - ' + ingredient.getDescription())}">1
-												Teaspoon of Sugar</li>
+
+											<li th:each="ingredient: ${recipe. ingredients}"
+												th:text=" ${ingredient.amount} + ' '+
+											              ${ingredient.unitOfMeasure.description} + ' of ' +
+											              ${ingredient.description}"></li>
 										</ul>
 									</div>
 								</div>
@@ -189,7 +195,8 @@
 
 
 						<button type="submit" class="btn btn-primary">Submit</button>
-						<a th:href="@{'/index'}" id="cancel" name="cancel" class="btn btn-default">Cancel</a>
+						<a th:href="@{'/index'}" id="cancel" name="cancel"
+							class="btn btn-default">Cancel</a>
 					</div>
 					<!-- Hidden fields -->
 					<input type="hidden" th:field="*{id}" />

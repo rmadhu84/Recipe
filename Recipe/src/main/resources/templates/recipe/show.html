@@ -27,12 +27,15 @@
 	<div class="container-fluid" style="margin-top: 20px">
 		<div class="page-header col-md-6 col-md-offset-3">
 			<div class="row">
-				<div class="col-md-11">
+				<div class="col-md-10">
 					<h1 th:text="${recipe.description}">Example Page Header</h1>
 				</div>
 				<div class="col-md-1">
-					<a th:href="@{'/index'}"> <span
-						class="glyphicon glyphicon-home"></span>
+					<a th:href="@{'/index'}"> <span class="glyphicon glyphicon-home"></span>
+					</a>
+				</div>
+				<div class="col-md-1">
+					<a th:href="@{'/recipe/'+  ${recipe.id} +'/edit/'}"> <span class="glyphicon glyphicon-pencil"></span>
 					</a>
 				</div>
 			</div>
