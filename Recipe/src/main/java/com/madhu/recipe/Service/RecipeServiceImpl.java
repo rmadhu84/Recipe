@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.madhu.recipe.Model.Recipe;
 import com.madhu.recipe.Repositories.RecipeRepository;
+import com.madhu.recipe.commands.CategoryCommand;
 import com.madhu.recipe.commands.RecipeCommand;
 import com.madhu.recipe.converters.RecipeCmdToMdlConverter;
 import com.madhu.recipe.converters.RecipeMdlToCmdConverter;
@@ -34,7 +35,6 @@ public class RecipeServiceImpl implements RecipeService {
 	private final RecipeMdlToCmdConverter toCmdConverter;
 	
 	private final CategoryService categoryService;
-	
 	
 
 	/**
@@ -89,10 +89,11 @@ public class RecipeServiceImpl implements RecipeService {
 		return toCmdConverter.convert(recipe.get());
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
-	public RecipeCommand getRecipesByIdForEdit(Long id) {
+	public RecipeCommand getRecipesByIdForEdit(Long id, Set<CategoryCommand> categories) {
 
-		RecipeCommand command = getRecipesById(id);
+		RecipeCommand command = getRecipesById(id);		
 		
 		command.getCategories().forEach(category ->{
 			command.getSelectedCategories().add(category.getCategoryName());
@@ -100,9 +101,11 @@ public class RecipeServiceImpl implements RecipeService {
 		});
 		
 		command.getCategories().clear();
-		categoryService.getAllCategories().forEach(category ->{
+		
+		categories.forEach(category ->{
 			command.addCategory(category);
 		});
+		
 
 		return command;
 	}

@@ -3,7 +3,6 @@
  */
 package com.madhu.recipe.controller;
 
-import java.util.Enumeration;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,21 +36,22 @@ public class RecipeController {
 
 	private CategoryService categoryService;
 
+	private HttpSession session;
+
+	private HttpServletRequest request;
+
 	/**
 	 * @param recipeService
 	 * @param catergoryService
 	 */
-	public RecipeController(RecipeService recipeService, CategoryService categoryService) {
+	public RecipeController(RecipeService recipeService, CategoryService categoryService, HttpSession session,
+			HttpServletRequest request) {
 
 		super();
 		this.recipeService = recipeService;
 		this.categoryService = categoryService;
-
-	}
-
-	@ModelAttribute("CategorySet")
-	public Set<CategoryCommand> getAllCategories() {
-		return categoryService.getAllCategories();
+		this.request = request;
+		this.session = session;
 
 	}
 
@@ -63,24 +63,17 @@ public class RecipeController {
 
 	}
 
-	@RequestMapping("/new1")
-	public String createRecipe(Model model, HttpServletRequest request, HttpSession session) {
+	@SuppressWarnings("unchecked")
+	@RequestMapping("/new")
+	public String createRecipe(Model model) {
 
 		log.info("Create new Recipe ...");
 		RecipeCommand command = new RecipeCommand();
 
-		categoryService.getAllCategories().forEach(category -> {
-			command.addCategory(category);
+		Set<CategoryCommand> category = (Set<CategoryCommand>) session.getAttribute("CategorySet");
+		category.forEach(c -> {
+			command.addCategory(c);
 		});
-		System.out.println("Inside of dosomething handler method");
-
-		System.out.println("*** Session data ***");
-		Enumeration<String> e = session.getAttributeNames();
-		while (e.hasMoreElements()) {
-			String s = e.nextElement();
-			System.out.println(s);
-			System.out.println("**" + session.getAttribute(s));
-		}
 
 		model.addAttribute("recipe", command);
 
@@ -88,11 +81,14 @@ public class RecipeController {
 
 	}
 
+	@SuppressWarnings("unchecked")
 	@RequestMapping("/{id}/edit/")
 	public String editRecipe(@PathVariable String id, Model model) {
 
 		log.info("Edit Recipe ...");
-		RecipeCommand command = recipeService.getRecipesByIdForEdit(Long.valueOf(id));
+		
+		Set<CategoryCommand> categories = (Set<CategoryCommand>) session.getAttribute("CategorySet");
+		RecipeCommand command = recipeService.getRecipesByIdForEdit(Long.valueOf(id), categories);
 		model.addAttribute("recipe", command);
 		return "recipe/recipeform";
 
@@ -117,19 +113,19 @@ public class RecipeController {
 
 	}
 
-	@RequestMapping("/new")
-	public String loosuMethod(Model model, HttpServletRequest request, HttpSession session) {
-		System.out.println("Inside of dosomething handler method");
-
-		System.out.println("*** Session data ***");
-		Enumeration<String> e = session.getAttributeNames();
-		while (e.hasMoreElements()) {
-			String s = e.nextElement();
-			System.out.println(s);
-			System.out.println("**" + session.getAttribute(s));
-		}
-
-		return "recipe/recipeform";
-	}
+	/*
+	 * Sample code..can be discarded
+	 * 
+	 * @RequestMapping("/dosomething") public String loosuMethod(Model model,
+	 * HttpServletRequest request, HttpSession session) {
+	 * System.out.println("Inside of dosomething handler method");
+	 * 
+	 * System.out.println("*** Session data ***"); Enumeration<String> e =
+	 * session.getAttributeNames(); while (e.hasMoreElements()) { String s =
+	 * e.nextElement(); System.out.println(s); System.out.println("**" +
+	 * session.getAttribute(s)); }
+	 * 
+	 * return "recipe/recipeform"; }
+	 */
 
 }

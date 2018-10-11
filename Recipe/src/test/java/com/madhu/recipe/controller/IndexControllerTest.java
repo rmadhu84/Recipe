@@ -12,6 +12,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.servlet.http.HttpSession;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
@@ -24,6 +26,7 @@ import org.springframework.ui.Model;
 import com.madhu.recipe.Model.Recipe;
 import com.madhu.recipe.Service.CategoryService;
 import com.madhu.recipe.Service.RecipeService;
+import com.madhu.recipe.Service.UnitOfMeasureService;
 import com.madhu.recipe.commands.RecipeCommand;
 
 public class IndexControllerTest {
@@ -39,10 +42,16 @@ public class IndexControllerTest {
 	@Mock
 	CategoryService categoryService;
 	
+	@Mock
+	UnitOfMeasureService uomService;
+	
+	@Mock
+	HttpSession session;
+	
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		ic = new IndexController(recipeService, categoryService);
+		ic = new IndexController(recipeService, categoryService, uomService, session);
 	}
 
 	@Test

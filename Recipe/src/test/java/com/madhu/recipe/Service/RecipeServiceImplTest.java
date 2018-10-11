@@ -52,7 +52,7 @@ public class RecipeServiceImplTest {
 	
 	@Mock
 	CategoryRepository catRepo;
-
+	
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);

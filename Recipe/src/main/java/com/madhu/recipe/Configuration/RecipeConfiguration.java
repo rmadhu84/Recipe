@@ -66,6 +66,6 @@ public class RecipeConfiguration {
 		});
 		
 		return map;
-	}
-
+	}	
+	
 }

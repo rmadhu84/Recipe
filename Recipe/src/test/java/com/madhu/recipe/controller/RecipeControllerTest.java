@@ -7,6 +7,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -29,13 +32,19 @@ public class RecipeControllerTest {
 	@Mock
 	CategoryService categoryService;
 	
+	@Mock
+	HttpSession session;
+	
+	@Mock
+	HttpServletRequest request;
+	
 	MockMvc mvc ;
 
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
 		
-		rc = new RecipeController(recipeService, categoryService);
+		rc = new RecipeController(recipeService, categoryService, session, request);
 		mvc  = MockMvcBuilders.standaloneSetup(rc).build();
 	}
 
