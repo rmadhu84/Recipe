@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,7 +55,8 @@ public class RecipeController {
 		this.session = session;
 
 	}
-
+	
+	@GetMapping
 	@RequestMapping("/{id}/show/")
 	public String getRecipeById(@PathVariable String id, Model model) {
 
@@ -64,6 +66,7 @@ public class RecipeController {
 	}
 
 	@SuppressWarnings("unchecked")
+	@GetMapping
 	@RequestMapping("/new")
 	public String createRecipe(Model model) {
 
@@ -82,6 +85,7 @@ public class RecipeController {
 	}
 
 	@SuppressWarnings("unchecked")
+	@GetMapping
 	@RequestMapping("/{id}/edit/")
 	public String editRecipe(@PathVariable String id, Model model) {
 
@@ -94,7 +98,8 @@ public class RecipeController {
 
 	}
 
-	@PostMapping("/")
+	@PostMapping
+	@RequestMapping("/")
 	public String saveOrUpdate(@ModelAttribute RecipeCommand command) {
 
 		log.info("*** Saving recipe *** " + command.getId());
@@ -104,6 +109,7 @@ public class RecipeController {
 
 	}
 
+	@GetMapping
 	@RequestMapping("/{id}/delete/")
 	public String deleteRecipe(@PathVariable String id) {
 

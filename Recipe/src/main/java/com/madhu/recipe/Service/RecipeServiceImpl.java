@@ -94,19 +94,13 @@ public class RecipeServiceImpl implements RecipeService {
 	public RecipeCommand getRecipesByIdForEdit(Long id, Set<CategoryCommand> categories) {
 
 		RecipeCommand command = getRecipesById(id);		
-		
 		command.getCategories().forEach(category ->{
 			command.getSelectedCategories().add(category.getCategoryName());
-			
 		});
-		
 		command.getCategories().clear();
-		
 		categories.forEach(category ->{
 			command.addCategory(category);
 		});
-		
-
 		return command;
 	}
 

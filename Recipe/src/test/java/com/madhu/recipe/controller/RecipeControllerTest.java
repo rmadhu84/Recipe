@@ -1,6 +1,8 @@
 package com.madhu.recipe.controller;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -114,6 +116,12 @@ public class RecipeControllerTest {
 				.param("description", "some string")).andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/recipe/2/show/"));
 
+	}
+	
+	@Test
+	public void testDeleteRecipeById() throws Exception {
+		mvc.perform(get("/recipe/1/delete/")).andExpect(status().is3xxRedirection()).andExpect(view().name("redirect:/index"));
+		verify(recipeService, times(1)).deleteRecipeById(LONG_VALUE);
 	}
 
 }
