@@ -104,15 +104,15 @@ public class RecipeControllerTest {
 
 	}
 
-	//@Test
+	@Test
 	public void testPostNewRecipeForm() throws Exception {
 		RecipeCommand recipe = new RecipeCommand();
 		recipe.setId(2L);
 		when(recipeService.saveRecipe(any())).thenReturn(recipe);
 
-		mvc.perform(post("/recipe").contentType(MediaType.APPLICATION_FORM_URLENCODED).param("id", "")
+		mvc.perform(post("/recipe/").contentType(MediaType.APPLICATION_FORM_URLENCODED).param("id", "")
 				.param("description", "some string")).andExpect(status().is3xxRedirection())
-				.andExpect(view().name("redirect:/recipe/2/show"));
+				.andExpect(view().name("redirect:/recipe/2/show/"));
 
 	}
 
