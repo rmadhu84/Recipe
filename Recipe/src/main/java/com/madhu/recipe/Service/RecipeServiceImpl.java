@@ -80,7 +80,7 @@ public class RecipeServiceImpl implements RecipeService {
 	 */
 	@Override
 	public RecipeCommand getRecipesById(Long id) {
-		// TODO Auto-generated method stub
+		log.debug("Fetching Recipe: " + id);
 		Optional<Recipe> recipe = recipeRepo.findById(id);
 		if (!recipe.isPresent()) {
 			throw new RuntimeException("Could not find recipe.");
