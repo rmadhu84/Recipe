@@ -38,7 +38,7 @@ public class IngredientControllerTest {
 
 	@Test
 	public void testListIngredients() throws Exception {
-		mvc.perform(get("/recipe/" + LONG_VALUE + "/ingredients/list")).andExpect(status().isOk())
+		mvc.perform(get("/recipe/" + LONG_VALUE + "/ingredients/")).andExpect(status().isOk())
 				.andExpect(view().name("recipe/ingredients/list"));
 	}
 
