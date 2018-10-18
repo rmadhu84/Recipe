@@ -37,6 +37,7 @@
 							<tr>
 								<th>ID</th>
 								<th>Description</th>
+								<th><span class="glyphicon glypicon-eye-open"></span></th>
 								<th><span class="glyphicon glypicon-pencil"></span></th>
 								<th><span class="glyphicon glypicon-trash"></span></th>
 								</tr>
@@ -44,19 +45,22 @@
 						<tr th:remove="all">
 							<td th:text="${recipe.id}">123</td>
 							<td th:text="${recipe.description}">Tasty Goodnees 1</td>
+							<td><a href="#">View</a></td>
 							<td><a href="#">Edit</a></td>
 							<td><a href="#">Delete</a></td>
 						</tr>
 						<tr th:remove="all">
 							<td th:text="${recipe.id}">456</td>
 							<td th:text="${recipe.description}">Tasty Goodnees 2</td>
+							<td><a href="#">View</a></td>
 							<td><a href="#">Edit</a></td>
 							<td><a href="#">Delete</a></td>
 						</tr>
 						<tr th:each="ingredient:${recipe.ingredients}">
 							<td th:text="${ingredient.id}">789</td>
 							<td th:text="${ingredient.amount} + ' ' + ${ingredient.unitOfMeasure.description}+ ' of '+${ingredient.description}">Deliciously Healthy</td>
-							<td><a href="#" th:href="@{'/recipe/'+  ${ingredient.id} +'/edit/'}"> <span class="glyphicon glyphicon-pencil"></a></td>
+							<td><a href="#" th:href="@{'/recipe/'+ ${recipe.id} +'/ingredient/'+  ${ingredient.id} +'/show'}"> <span class="glyphicon glyphicon-eye-open"></a></td>
+							<td><a href="#" th:href="@{'/recipe/'+ ${recipe.id} +'/ingredient/'+  ${ingredient.id} +'/edit'}"> <span class="glyphicon glyphicon-pencil"></a></td>
 							<td><a href="#" th:href="@{'/recipe/'+ ${recipe.id} +'/ingredient/'+  ${ingredient.id} +'/delete'}"> <span class="glyphicon glyphicon-trash"></a></td>
 						</tr>
 					</table>

@@ -34,6 +34,9 @@ public class IngredientMdlToCmdConverter implements Converter<Ingredient, Ingred
 		ingredient.setAmount(source.getAmount());
 		ingredient.setDescription(source.getDescription());
 		ingredient.setUnitOfMeasure(uomConverter.convert(source.getUnitOfMeasure()));
+		if (source.getRecipe() != null) {
+            ingredient.setRecipeId(source.getRecipe().getId());
+        }
 		return ingredient;
 	}
 
