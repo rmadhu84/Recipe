@@ -62,7 +62,13 @@ public class IngredientController {
 	@RequestMapping("/{recipeId}/ingredient/{ingredientId}/show")
 	public String showIngredient(@PathVariable String recipeId, @PathVariable String ingredientId, Model model) {
 		log.debug("Directing to ingredient.show page");
-		IngredientCommand ingredientCommand = ingredientService.findById(Long.valueOf(ingredientId));		
+		
+		/* First method to fetch Ingredient By ID. Fetches ingredient directly, using given Ingredient ID
+		IngredientCommand ingredientCommand = ingredientService.findById(Long.valueOf(ingredientId));
+		*/
+		
+		//Second method to fetch Ingredient by ID - Uses the Recipe to Fetch all Ingredients for recipe and filter by given Ingredient ID 
+		IngredientCommand ingredientCommand = ingredientService.findIngredientByRecipeIdAndIngredientId(Long.valueOf(recipeId), Long.valueOf(ingredientId));
 		model.addAttribute("ingredient", ingredientCommand);
 		return "recipe/ingredients/show";
 	}
