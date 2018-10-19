@@ -4,6 +4,8 @@
 package com.madhu.recipe.commands;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,5 +25,6 @@ public class IngredientCommand {
 	private BigDecimal amount;
 	private RecipeCommand recipe;
 	private UnitOfMeasureCommand unitOfMeasure;
+	private Set<UnitOfMeasureCommand> allUoms = new HashSet<UnitOfMeasureCommand>();
 
 }

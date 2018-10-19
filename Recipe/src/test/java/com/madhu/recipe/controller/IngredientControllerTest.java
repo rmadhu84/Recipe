@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.madhu.recipe.Service.IngredientService;
 import com.madhu.recipe.Service.RecipeService;
+import com.madhu.recipe.Service.UnitOfMeasureService;
 
 public class IngredientControllerTest {
 
@@ -23,6 +24,9 @@ public class IngredientControllerTest {
 
 	@Mock
 	IngredientService ingredientService;
+	
+	@Mock
+	UnitOfMeasureService unitOfMeasureService;
 
 	private static final Long LONG_VALUE = 1L;
 
@@ -32,7 +36,7 @@ public class IngredientControllerTest {
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		ic = new IngredientController(recipeService, ingredientService);
+		ic = new IngredientController(recipeService, ingredientService, unitOfMeasureService);
 		mvc = MockMvcBuilders.standaloneSetup(ic).build();
 	}
 

@@ -96,10 +96,9 @@
 
 									<!-- Difficulty -->
 									<div class="col-md-3 form-group">
-										<label th:text="'Difficulty: '">Difficulty</label> <select
-											class="form-control" th:field="*{difficulty}">
-											<option
-												th:each="level : ${T(com.madhu.recipe.Enums.Difficulty).values()}"
+										<label th:text="'Difficulty: '">Difficulty</label> 
+										<select class="form-control" th:field="*{difficulty}">
+											<option th:each="level : ${T(com.madhu.recipe.Enums.Difficulty).values()}"
 												th:value="${level}" th:text="${level}">Easy</option>
 											<option value="Moderate" th:remove="all">Moderate</option>
 											<option value="Hard" th:remove="all">Hard</option>
