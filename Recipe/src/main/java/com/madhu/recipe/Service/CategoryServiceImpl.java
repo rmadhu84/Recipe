@@ -22,7 +22,7 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	@Override
 	public Set<CategoryCommand> getAllCategories() {
-		log.info("Fetching All Categories");
+		log.debug("Fetching All Categories");
 		Set<CategoryCommand> categories = new HashSet<CategoryCommand>();
 		
 		catRepo.findAll().forEach(s->{
@@ -43,14 +43,14 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Override
 	public CategoryCommand getCategoryByName(String categoryName) {
-		log.info("Fetching: " + categoryName);
+		log.debug("Fetching: " + categoryName);
 		
 		return converter.convert(catRepo.findByCategoryName(categoryName).orElse(null));
 	}
 
 	@Override
 	public Set<CategoryCommand> getCategoriesByNames(List<String> categoryNames) {
-		log.info("Fetching list of categories by names");
+		log.debug("Fetching list of categories by names");
 		Set<CategoryCommand> categories = new HashSet<CategoryCommand>();
 		catRepo.findByCategoryNameIn(categoryNames).forEach(category ->{
 			categories.add(converter.convert(category));
@@ -58,6 +58,14 @@ public class CategoryServiceImpl implements CategoryService {
 		return categories;
 	}
 	
-
+	@Override
+	public Set<CategoryCommand> getCategoriesByIds(List<Long> categoryIds){
+		log.debug("Fetching list of Categories by Ids");
+		Set<CategoryCommand> categories = new HashSet<CategoryCommand>();
+		catRepo.findByIdIn(categoryIds).forEach(category ->{
+			categories.add(converter.convert(category));
+		});
+		return categories;
+	}
 
 }

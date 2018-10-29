@@ -94,10 +94,11 @@ public class RecipeServiceImpl implements RecipeService {
 	public RecipeCommand getRecipesByIdForEdit(Long id, Set<CategoryCommand> categories) {
 
 		RecipeCommand command = getRecipesById(id);		
+	
 		command.getCategories().forEach(category ->{
-			command.getSelectedCategories().add(category.getCategoryName());
+			command.getSelectedCategoriesId().add(category.getId());
 		});
-		command.getCategories().clear();
+		//command.getCategories().clear();
 		categories.forEach(category ->{
 			command.addCategory(category);
 		});
@@ -108,7 +109,7 @@ public class RecipeServiceImpl implements RecipeService {
 	@Transactional
 	public RecipeCommand saveRecipe(RecipeCommand recipe) {
 		log.debug("Recipe saved");
-		recipe.getCategories().addAll(categoryService.getCategoriesByNames(recipe.getSelectedCategories()));
+		recipe.getCategories().addAll(categoryService.getCategoriesByIds(recipe.getSelectedCategoriesId()));
 		Recipe unSavedRecipe = toMdlConverter.convert(recipe);
 		RecipeCommand savedRecipe = toCmdConverter.convert(recipeRepo.save(unSavedRecipe));
 		return savedRecipe;

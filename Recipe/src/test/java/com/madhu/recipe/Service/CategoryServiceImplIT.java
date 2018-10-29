@@ -39,6 +39,11 @@ public class CategoryServiceImplIT {
 	add(ITALIAN);
 	}};
 	
+	private static final List<Long> LIST_OF_IDS = new ArrayList<Long>() {{
+	add(1L);
+	add(2L);
+	}};
+	
 	@Before
 	public void setUp() throws Exception {
 	}
@@ -58,8 +63,14 @@ public class CategoryServiceImplIT {
 	}
 	
 	@Test
-	public void tesGetListOfCategoriesByNames() {
+	public void testGetListOfCategoriesByNames() {
 		Set<CategoryCommand> commandSet = service.getCategoriesByNames(LIST_OF_NAMES);
+		assertEquals(2, commandSet.size());
+	}
+	
+	@Test
+	public void testGetListOfCategoriesByIds() {
+		Set<CategoryCommand> commandSet = service.getCategoriesByIds(LIST_OF_IDS);
 		assertEquals(2, commandSet.size());
 	}
 

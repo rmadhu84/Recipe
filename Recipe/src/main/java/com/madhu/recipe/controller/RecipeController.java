@@ -119,19 +119,4 @@ public class RecipeController {
 
 	}
 
-	/*
-	 * Sample code..can be discarded
-	 * 
-	 * @RequestMapping("/dosomething") public String loosuMethod(Model model,
-	 * HttpServletRequest request, HttpSession session) {
-	 * System.out.println("Inside of dosomething handler method");
-	 * 
-	 * System.out.println("*** Session data ***"); Enumeration<String> e =
-	 * session.getAttributeNames(); while (e.hasMoreElements()) { String s =
-	 * e.nextElement(); System.out.println(s); System.out.println("**" +
-	 * session.getAttribute(s)); }
-	 * 
-	 * return "recipe/recipeform"; }
-	 */
-
 }

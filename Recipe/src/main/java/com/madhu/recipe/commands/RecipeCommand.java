@@ -36,7 +36,7 @@ public class RecipeCommand {
 	private NoteCommand note;
 	private Set<IngredientCommand> ingredients = new HashSet<IngredientCommand>();
 	private Set<CategoryCommand> categories = new HashSet<CategoryCommand>();
-	private List<String> selectedCategories = new ArrayList<String>();
+	private List<Long> selectedCategoriesId = new ArrayList<Long>();
 	
 	/**
 	 * 

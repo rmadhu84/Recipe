@@ -69,11 +69,11 @@
 											<label> <input type="checkbox" value="" /> Cat 2
 											</label>
 										</div>
-
+										
 										<ul class="list-inline text-justify">
 											<li th:each="category : ${recipe.categories}">
-												<input type="checkbox" th:value="${category.categoryName}" th:field="*{selectedCategories}" th:checked="true" /> 
-												<label th:for="${#ids.prev('selectedCategories')}" th:text="${category.categoryName}"></label>
+												<input type="checkbox" th:value="${category.id}" th:field="*{selectedCategoriesId}" th:checked="true" /> 
+												<label th:for="${#ids.prev('selectedCategoriesId')}" th:text="${category.categoryName}"></label>
 											</li>
 										</ul>
 									</div>

@@ -16,5 +16,5 @@ public interface CategoryService {
 	Set<CategoryCommand> getAllCategories();
 	CategoryCommand getCategoryByName(String categoryName);
 	Set<CategoryCommand> getCategoriesByNames(List<String> categoryNames);
-
+	Set<CategoryCommand> getCategoriesByIds(List<Long> categoryIds);
 }
