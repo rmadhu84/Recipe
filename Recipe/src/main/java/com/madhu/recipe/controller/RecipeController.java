@@ -70,7 +70,7 @@ public class RecipeController {
 	@RequestMapping("/new")
 	public String createRecipe(Model model) {
 
-		log.info("Create new Recipe ...");
+		log.debug("Create new Recipe ...");
 		RecipeCommand command = new RecipeCommand();
 
 		Set<CategoryCommand> category = (Set<CategoryCommand>) session.getAttribute("CategorySet");
@@ -89,7 +89,7 @@ public class RecipeController {
 	@RequestMapping("/{id}/edit/")
 	public String editRecipe(@PathVariable String id, Model model) {
 
-		log.info("Edit Recipe ...");
+		log.debug("Edit Recipe ...");
 		
 		Set<CategoryCommand> categories = (Set<CategoryCommand>) session.getAttribute("CategorySet");
 		RecipeCommand command = recipeService.getRecipesByIdForEdit(Long.valueOf(id), categories);
@@ -102,9 +102,9 @@ public class RecipeController {
 	@RequestMapping("/")
 	public String saveOrUpdate(@ModelAttribute RecipeCommand command) {
 
-		log.info("*** Saving recipe *** " + command.getId());
+		log.debug("*** Saving recipe *** " + command.getId());
 		command = recipeService.saveRecipe(command);
-		log.info("*** Redirecting to Home Page *** ");
+		log.debug("*** Redirecting to Home Page *** ");
 		return "redirect:/recipe/" + command.getId() + "/show/";
 
 	}
@@ -113,7 +113,7 @@ public class RecipeController {
 	@RequestMapping("/{id}/delete/")
 	public String deleteRecipe(@PathVariable String id) {
 
-		log.info("*** Deleting Recipe *** " + id);
+		log.debug("*** Deleting Recipe *** " + id);
 		recipeService.deleteRecipeById(new Long(id));
 		return "redirect:/index";
 
