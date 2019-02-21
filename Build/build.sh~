@@ -1,0 +1,9 @@
+#!/bin/bash
+echo hello world
+LOGFILE=build
+LOGEXTENSION=log
+DATE=`date +%m%d%Y`
+echo $DATE
+touch ${LOGFILE}_${DATE}.${LOGEXTENSION}
+
+mvn install -l ${LOGFILE}_${DATE}.${LOGEXTENSION}
