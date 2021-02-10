@@ -93,6 +93,7 @@ public class RecipeServiceImpl implements RecipeService {
 	@Override
 	public RecipeCommand getRecipesByIdForEdit(Long id, Set<CategoryCommand> categories) {
 
+		log.info("Getting Recipes by if for editing");
 		RecipeCommand command = getRecipesById(id);		
 	
 		command.getCategories().forEach(category ->{
